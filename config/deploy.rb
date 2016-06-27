@@ -26,7 +26,7 @@ set :shared_paths, ['config/database.yml', 'config/secrets.yml', 'log']
 
 # Optional settings:
 set :user, 'linkage'    # Username in the server to SSH to.
-set :rail_env, 'production'
+set :rail_env, 'development'
 #   set :port, '30000'     # SSH port number.
 #   set :forward_agent, true     # SSH forward_agent.
 
