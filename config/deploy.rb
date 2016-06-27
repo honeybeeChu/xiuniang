@@ -56,6 +56,36 @@ task :setup => :environment do
   queue! %[touch "#{deploy_to}/#{shared_path}/config/secrets.yml"]
   queue  %[echo "-----> Be sure to edit '#{deploy_to}/#{shared_path}/config/database.yml' and 'secrets.yml'."]
 
+
+  # puma.rb 配置puma必须得文件夹及文件
+  queue! %[mkdir -p "#{deploy_to}/shared/tmp/pids"]
+  queue! %[chmod g+rx,u+rwx "#{deploy_to}/shared/tmp/pids"]
+
+  queue! %[mkdir -p "#{deploy_to}/shared/tmp/sockets"]
+  queue! %[chmod g+rx,u+rwx "#{deploy_to}/shared/tmp/sockets"]
+
+  queue! %[touch "#{deploy_to}/shared/config/puma.rb"]
+  queue  %[echo "-----> Be sure to edit 'shared/config/puma.rb'."]
+
+  # tmp/sockets/puma.state
+  queue! %[touch "#{deploy_to}/shared/tmp/sockets/puma.state"]
+  queue  %[echo "-----> Be sure to edit 'shared/tmp/sockets/puma.state'."]
+
+
+  # puma.pid
+  # queue! %[touch "#{deploy_to}/shared/tmp/pids/puma.pid"]
+
+  # log/puma.stdout.log
+  queue! %[touch "#{deploy_to}/shared/log/puma.stdout.log"]
+  queue  %[echo "-----> Be sure to edit 'shared/log/puma.stdout.log'."]
+
+  # log/puma.stdout.log
+  queue! %[touch "#{deploy_to}/shared/log/puma.stderr.log"]
+  queue  %[echo "-----> Be sure to edit 'shared/log/puma.stderr.log'."]
+
+  queue  %[echo "-----> Be sure to edit '#{deploy_to}/#{shared_path}/config/database.yml'."]
+
+
   if repository
     repo_host = repository.split(%r{@|://}).last.split(%r{:|\/}).first
     repo_port = /:([0-9]+)/.match(repository) && /:([0-9]+)/.match(repository)[1] || '22'
@@ -82,6 +112,7 @@ task :deploy => :environment do
     invoke :'rails:db_migrate'
     invoke :'rails:assets_precompile'
     invoke :'deploy:cleanup'
+    invoke :'puma:restart'
 
     to :launch do
       queue "mkdir -p #{deploy_to}/#{current_path}/tmp/"
