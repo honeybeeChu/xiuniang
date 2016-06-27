@@ -112,7 +112,7 @@ task :deploy => :environment do
     invoke :'rails:db_migrate'
     invoke :'rails:assets_precompile'
     invoke :'deploy:cleanup'
-    invoke :'puma:restart'
+    # invoke :'puma:restart'
 
     to :launch do
       queue "mkdir -p #{deploy_to}/#{current_path}/tmp/"
