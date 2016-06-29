@@ -1,0 +1,2 @@
+class WeixinClientController < ApplicationController
+end

@@ -1,0 +1,2 @@
+module WeixinClientHelper
+end
