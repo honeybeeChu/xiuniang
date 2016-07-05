@@ -4,6 +4,11 @@
 # 3, @keyword: 目前微信只有这三种情况存在关键字: 文本消息, 事件推送, 接收语音识别结果
 WeixinRailsMiddleware::WeixinController.class_eval do
 
+  @client = WeixinAuthorize::Client.new(ENV["wxa4de3c29bddd316e"], ENV["586589e71887eed25ac77e133778579f"])
+
+  @client.http_post("https://api.weixin.qq.com/cgi-bin/poi/getpoilist?access_token="+@client.access_token,
+                    post_body, url_params, WeixinAuthorize::CUSTOM_ENDPOINT)
+
   def reply
     render xml: send("response_#{@weixin_message.MsgType}_message", {})
   end
@@ -95,12 +100,12 @@ WeixinRailsMiddleware::WeixinController.class_eval do
       reply_text_message("扫描带参数二维码事件: 2. 用户已关注时的事件推送, keyword: #{@keyword}")
     end
 
-    def handle_location_event # 上报地理位置事件
-      @lat = @weixin_message.Latitude
-      @lgt = @weixin_message.Longitude
-      @precision = @weixin_message.Precision
-      reply_text_message("Your Location: #{@lat}, #{@lgt}, #{@precision}")
-    end
+    # def handle_location_event # 上报地理位置事件
+    #   @lat = @weixin_message.Latitude
+    #   @lgt = @weixin_message.Longitude
+    #   @precision = @weixin_message.Precision
+    #   reply_text_message("Your Location is: #{@lat}, #{@lgt}, #{@precision}")
+    # end
 
     # 点击菜单拉取消息时的事件推送
     def handle_click_event
@@ -261,4 +266,9 @@ WeixinRailsMiddleware::WeixinController.class_eval do
       Rails.logger.info("回调事件处理")
     end
 
+    private
+  def getStores
+
+
+  end
 end
