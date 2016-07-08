@@ -30,11 +30,14 @@ WeixinRailsMiddleware::WeixinController.class_eval do
       @scale = @weixin_message.Scale
       @label = @weixin_message.Label
 
-      storeHash = getNearStores @lx,@ly
+      # storeHash = getNearStores @lx,@ly
+
+      storeHash = Hash["a" => 100, "b" => 200]
+
 
       articles = Array.new
       storeHash.each do |key,value|
-        article  = Hash["title" => "Happy Day", "description" => "Is Really A Happy Day", "url" => "https://www.baidu.com", "picurl" => ""]
+        article  = Hash["title" => "Happy Day", "description" => "Is Really A Happy Day #{key}", "url" => "https://www.baidu.com", "picurl" => ""]
 
         articles.push article
       end
