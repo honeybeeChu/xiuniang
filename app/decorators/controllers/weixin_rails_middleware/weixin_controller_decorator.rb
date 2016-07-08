@@ -5,7 +5,7 @@
 include Math
 WeixinRailsMiddleware::WeixinController.class_eval do
 
-  @client = WeixinAuthorize::Client.new(ENV["wxa4de3c29bddd316e"], ENV["586589e71887eed25ac77e133778579f"])
+
 
   # @client.http_post("https://api.weixin.qq.com/cgi-bin/poi/getpoilist?access_token="+@client.access_token,
   #                   post_body, url_params, WeixinAuthorize::CUSTOM_ENDPOINT)
@@ -41,6 +41,7 @@ WeixinRailsMiddleware::WeixinController.class_eval do
         articles.push article
       end
 
+      @client = WeixinAuthorize::Client.new(ENV["wxa4de3c29bddd316e"], ENV["586589e71887eed25ac77e133778579f"])
       @client.send_news_custom @weixin_message.FromUserName, articles
 
       # reply_text_message("Your Location: #{@lx}, #{@ly}, #{@scale}, #{@label}")
