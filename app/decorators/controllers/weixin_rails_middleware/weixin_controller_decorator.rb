@@ -32,7 +32,7 @@ WeixinRailsMiddleware::WeixinController.class_eval do
       storeHash = getNearStores @lx,@ly
 
 
-      articles = new Array
+      articles = Array.new
       storeHash.each do |key|
         article  = Hash["title" => "Happy Day", "description" => "Is Really A Happy Day #{key}",
                     "url" => "https://www.baidu.com","picurl" => ""]
@@ -301,9 +301,9 @@ WeixinRailsMiddleware::WeixinController.class_eval do
 
   # 获得最近的三个店铺
   def getNearStores latitude,logitude
-    nearStore = new Array
+    nearStore = Array.new
 
-    distanceArray = new Array
+    distanceArray = Array.new
     storeHash = Hash.new
     Store.each do |store|
       distance = getDistance store[:latitude].to_f, store[:longitude].to_f,latitude,logitude
