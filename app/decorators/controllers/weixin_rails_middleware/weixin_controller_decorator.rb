@@ -3,6 +3,7 @@
 # 2, @weixin_public_account: 如果配置了public_account_class选项,则会返回当前实例,否则返回nil.
 # 3, @keyword: 目前微信只有这三种情况存在关键字: 文本消息, 事件推送, 接收语音识别结果
 WeixinRailsMiddleware::WeixinController.class_eval do
+  include Math
 
   @client = WeixinAuthorize::Client.new(ENV["wxa4de3c29bddd316e"], ENV["586589e71887eed25ac77e133778579f"])
 
@@ -288,7 +289,7 @@ WeixinRailsMiddleware::WeixinController.class_eval do
     private
   # 根据两个点的经纬度计算两个点的距离（直线距离）
   def getDistance lat1,lng1, lat2, lng2
-    include Math
+
     lat_diff = (lat1 - lat2)*PI/180.0
     lng_diff = (lng1 - lng2)*PI/180.0
     lat_sin = Math.sin(lat_diff/2.0) ** 2
