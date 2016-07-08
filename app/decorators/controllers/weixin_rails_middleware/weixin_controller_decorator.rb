@@ -30,16 +30,16 @@ WeixinRailsMiddleware::WeixinController.class_eval do
       @scale = @weixin_message.Scale
       @label = @weixin_message.Label
 
-      # storeHash = getNearStores @lx,@ly
+      storeHash = getNearStores @lx,@ly
 
-      storeHash = Hash["a" => 100, "b" => 200]
-
+      # storeHash = Hash["a" => 100, "b" => 200]
 
       articles = Array.new
       storeHash.each do |key,value|
-        article  = Hash["title" => "Happy Day", "description" => "Is Really A Happy Day", "url" => "https://www.baidu.com", "picurl" => "ss"]
 
-        articles.push article.to_s
+        article = generate_article("Happy Day #{key}", "desc", "pic_url", "https://www.baidu.com")
+
+        articles.push article
       end
 
       @client = WeixinAuthorize::Client.new("wxa4de3c29bddd316e", "6d5dd9526242c753746ae3a8b54affe6")
