@@ -34,7 +34,7 @@ WeixinRailsMiddleware::WeixinController.class_eval do
 
       articles = Array.new
       storeHash.each do |key,value|
-        article  = Hash["title" => "Happy Day", "description" => "Is Really A Happy Day #{key}", "url" => "https://www.baidu.com", "picurl" => ""]
+        article  = Hash["title" => "Happy Day", "description" => "Is Really A Happy Day", "url" => "https://www.baidu.com", "picurl" => ""]
 
         articles.push article
       end
