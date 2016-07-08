@@ -41,7 +41,7 @@ WeixinRailsMiddleware::WeixinController.class_eval do
         articles.push article
       end
 
-      @client.send_news_custom @weixin_message.FromUserName articles
+      @client.send_news_custom @weixin_message.FromUserName, articles
 
       # reply_text_message("Your Location: #{@lx}, #{@ly}, #{@scale}, #{@label}")
 
