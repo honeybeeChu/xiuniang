@@ -403,3 +403,10 @@ Started GET "/assets/welcome.self-19a187bec6cdb96d6de80a61c16c857c613536adf91384
 
 
 Started GET "/assets/application.self-3b8dabdc891efe46b9a144b400ad69e37d7e5876bdc39dee783419a69d7ca819.js?body=1" for 127.0.0.1 at 2016-06-27 23:30:47 +0800
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreateStores (20160706065504)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.6ms)[0m  [1mCREATE TABLE "stores" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "sid" varchar, "business_name" varchar, "branch_name" varchar, "province" varchar, "city" varchar, "district" varchar, "address" varchar, "telephone" varchar, "categories" varchar, "offset_type" varchar, "longitude" varchar, "latitude" varchar, "photo_list" varchar, "recommend" varchar, "special" varchar, "introduction" varchar, "open_time" varchar, "avg_price" varchar, "map_img" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20160706065504"]]
+  [1m[36m (257.7ms)[0m  [1mcommit transaction[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.2ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"

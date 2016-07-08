@@ -11,6 +11,30 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+ActiveRecord::Schema.define(version: 20160706065504) do
+
+  create_table "stores", force: :cascade do |t|
+    t.string   "sid"
+    t.string   "business_name"
+    t.string   "branch_name"
+    t.string   "province"
+    t.string   "city"
+    t.string   "district"
+    t.string   "address"
+    t.string   "telephone"
+    t.string   "categories"
+    t.string   "offset_type"
+    t.string   "longitude"
+    t.string   "latitude"
+    t.string   "photo_list"
+    t.string   "recommend"
+    t.string   "special"
+    t.string   "introduction"
+    t.string   "open_time"
+    t.string   "avg_price"
+    t.string   "map_img"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
 
 end

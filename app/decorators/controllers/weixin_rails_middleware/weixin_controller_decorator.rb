@@ -6,8 +6,8 @@ WeixinRailsMiddleware::WeixinController.class_eval do
 
   @client = WeixinAuthorize::Client.new(ENV["wxa4de3c29bddd316e"], ENV["586589e71887eed25ac77e133778579f"])
 
-  @client.http_post("https://api.weixin.qq.com/cgi-bin/poi/getpoilist?access_token="+@client.access_token,
-                    post_body, url_params, WeixinAuthorize::CUSTOM_ENDPOINT)
+  # @client.http_post("https://api.weixin.qq.com/cgi-bin/poi/getpoilist?access_token="+@client.access_token,
+  #                   post_body, url_params, WeixinAuthorize::CUSTOM_ENDPOINT)
 
   def reply
     render xml: send("response_#{@weixin_message.MsgType}_message", {})
@@ -28,7 +28,21 @@ WeixinRailsMiddleware::WeixinController.class_eval do
       @ly    = @weixin_message.Location_Y
       @scale = @weixin_message.Scale
       @label = @weixin_message.Label
-      reply_text_message("Your Location: #{@lx}, #{@ly}, #{@scale}, #{@label}")
+
+      storeHash = getNearStores @lx,@ly
+
+
+      articles = new Array
+      storeHash.each do |key|
+        article  = Hash["title" => "Happy Day", "description" => "Is Really A Happy Day #{key}",
+                    "url" => "https://www.baidu.com","picurl" => ""]
+
+        articles.push article
+      end
+
+      @client.send_news_custom @weixin_message.FromUserName articles
+
+      # reply_text_message("Your Location: #{@lx}, #{@ly}, #{@scale}, #{@label}")
 
 
     end
@@ -266,9 +280,46 @@ WeixinRailsMiddleware::WeixinController.class_eval do
       Rails.logger.info("回调事件处理")
     end
 
-    private
-  def getStores
 
+
+
+
+
+    private
+  # 根据两个点的经纬度计算两个点的距离（直线距离）
+  def getDistance lat1,lng1, lat2, lng2
+    include Math
+    lat_diff = (lat1 - lat2)*PI/180.0
+    lng_diff = (lng1 - lng2)*PI/180.0
+    lat_sin = Math.sin(lat_diff/2.0) ** 2
+    lng_sin = Math.sin(lng_diff/2.0) ** 2
+    first = Math.sqrt(lat_sin + Math.cos(lat1*PI/180.0) * Math.cos(lat2*PI/180.0) * lng_sin)
+    result = (Math.asin(first) * 2 * 6378137.0).to_i
+    result.to_f/1000
+  end
+
+
+  # 获得最近的三个店铺
+  def getNearStores latitude,logitude
+    nearStore = new Array
+
+    distanceArray = new Array
+    storeHash = Hash.new
+    Store.each do |store|
+      distance = getDistance store[:latitude].to_f, store[:longitude].to_f,latitude,logitude
+      distanceArray.push(distance)
+      storeHash[distance] = store
+    end
+    distanceArray.sort!
+
+    returnHash = Hash.new
+    for i in 0..2
+      returnHash[distanceArray[i]] =storeHash[distanceArray[i]]
+    end
+    return returnHash
 
   end
+
+
+
 end
