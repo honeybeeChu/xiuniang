@@ -37,13 +37,14 @@ WeixinRailsMiddleware::WeixinController.class_eval do
 
       articles = Array.new
       storeHash.each do |key,value|
-        article  = Hash["title" => "Happy Day", "description" => "Is Really A Happy Day #{key}", "url" => "https://www.baidu.com", "picurl" => ""]
+        article  = Hash["title" => "Happy Day", "description" => "Is Really A Happy Day", "url" => "https://www.baidu.com", "picurl" => "ss"]
 
-        articles.push article
+        articles.push article.to_s
       end
 
       @client = WeixinAuthorize::Client.new("wxa4de3c29bddd316e", "6d5dd9526242c753746ae3a8b54affe6")
-      @client.send_news_custom @weixin_message.FromUserName, articles
+      @client.send_news_custom @weixin_message.FromUserName, articles.to_s
+
 
       # reply_text_message("Your Location: #{@lx}, #{@ly}, #{@scale}, #{@label}")
 
