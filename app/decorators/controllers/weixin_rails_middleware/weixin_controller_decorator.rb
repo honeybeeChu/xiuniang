@@ -305,7 +305,7 @@ WeixinRailsMiddleware::WeixinController.class_eval do
 
     distanceArray = Array.new
     storeHash = Hash.new
-    Store.each do |store|
+    Store.all.each do |store|
       distance = getDistance store[:latitude].to_f, store[:longitude].to_f,latitude,logitude
       distanceArray.push(distance)
       storeHash[distance] = store
