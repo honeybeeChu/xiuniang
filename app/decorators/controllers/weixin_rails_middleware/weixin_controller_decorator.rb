@@ -43,7 +43,7 @@ WeixinRailsMiddleware::WeixinController.class_eval do
       end
 
       @client = WeixinAuthorize::Client.new("wxa4de3c29bddd316e", "6d5dd9526242c753746ae3a8b54affe6")
-      @client.send_news_custom @weixin_message.FromUserName, articles.to_s
+      @client.send_news_custom @weixin_message.FromUserName, articles
 
 
       # reply_text_message("Your Location: #{@lx}, #{@ly}, #{@scale}, #{@label}")
