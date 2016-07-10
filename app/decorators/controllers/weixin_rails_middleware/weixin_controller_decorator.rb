@@ -39,10 +39,11 @@ WeixinRailsMiddleware::WeixinController.class_eval do
 
         article = generate_article("Happy Day #{key}", "desc", "pic_url", "https://www.baidu.com")
 
-        articles.push article
+        articles.push(article)
       end
 
       @client = WeixinAuthorize::Client.new("wxa4de3c29bddd316e", "6d5dd9526242c753746ae3a8b54affe6")
+
       @client.send_news_custom @weixin_message.FromUserName, articles
 
 

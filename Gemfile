@@ -33,7 +33,8 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # gem 'capistrano-rails', group: :development
 
 #wechat manager gem
-gem 'weixin_authorize', git: "https://github.com/lanrion/weixin_authorize.git"
+# gem 'weixin_authorize', git: "https://github.com/lanrion/weixin_authorize.git"
+gem 'weixin_authorize'
 gem 'weixin_rails_middleware'
 
 # puma
