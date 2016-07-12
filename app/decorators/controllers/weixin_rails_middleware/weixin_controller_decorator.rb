@@ -31,7 +31,7 @@ WeixinRailsMiddleware::WeixinController.class_eval do
       storeHash.each do |key,value|
         @_title = "#{value[:business_name]}#{value[:branch_name]}: #{key}公里"
         article={"title":@_title,"description":"最近店铺距离",
-                 "url":"http://localhost:3000/welcome/show?storeid=#{value[:id]}",
+                 "url":"http://xiuniang.yaxin-nanjing.com/welcome/show?storeid=#{value[:id]}",
                  "picurl":"http://mmbiz.qpic.cn/mmbiz/pZtBlJ86VibocrMbpbVQLib0Ao7Txt9YtewqCbGKksB8sonLBTLdxVwuIUjv7JrsTTQ7ns7g56T2qHxryy7D0Ldw/0?wx_fmt=jpeg"}
 
         articles.push(article)
