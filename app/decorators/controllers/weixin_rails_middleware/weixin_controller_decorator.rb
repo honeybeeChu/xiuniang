@@ -86,15 +86,15 @@ WeixinRailsMiddleware::WeixinController.class_eval do
     #   reply_text_message("回复视频信息")
     # end
 
-    # def response_event_message(options={})
-    #   event_type = @weixin_message.Event
-    #   method_name = "handle_#{event_type.downcase}_event"
-    #   if self.respond_to? method_name, true
-    #     send(method_name)
-    #   else
-    #     send("handle_undefined_event")
-    #   end
-    # end
+    def response_event_message(options={})
+      event_type = @weixin_message.Event
+      method_name = "handle_#{event_type.downcase}_event"
+      if self.respond_to? method_name, true
+        send(method_name)
+      else
+        send("handle_undefined_event")
+      end
+    end
 
     # 关注公众账号
     # def handle_subscribe_event
