@@ -34,10 +34,10 @@ WeixinRailsMiddleware::WeixinController.class_eval do
 
       articles = Array.new
       storeHash.each do |key,value|
-
-        article={"title":"#{value[:business_name]}的距离是#{key}千米","description":"a test ...",
+        _title = value[:branch_name].nil? "#{value[:business_name]}的距离是#{key}千米":"#{value[:business_name]}(#{value[:branch_name]})的距离是#{key}千米"
+        article={"title":_title,"description":"最近店铺距离",
                  "url":"https://wap.koudaitong.com/v2/showcase/mpnews?alias=x1rluidp&spm=m1468164257765106413412512.autoreply",
-                 "picurl":"http://mmbiz.qpic.cn/mmbiz/pZtBlJ86Vibpk8a9m8JNgQibyxGBQ4nm3OjM5Lnak8ztImt5HrMpXDsmhQOPYluNnib4dvrLRIhqfRobj8wLw2yRg/0?wx_fmt=jpeg"}
+                 "picurl":"http://mmbiz.qpic.cn/mmbiz/pZtBlJ86VibocrMbpbVQLib0Ao7Txt9YtewqCbGKksB8sonLBTLdxVwuIUjv7JrsTTQ7ns7g56T2qHxryy7D0Ldw/0?wx_fmt=jpeg"}
 
         articles.push(article)
       end
@@ -45,7 +45,7 @@ WeixinRailsMiddleware::WeixinController.class_eval do
       @client = WeixinAuthorize::Client.new("wxa4de3c29bddd316e", "6d5dd9526242c753746ae3a8b54affe6")
 
       params = {
-          "touser":"oGIF7twEkUii73E_EsLnHpgO8QUc",
+          "touser":@weixin_message.FromUserName,   #"oGIF7twEkUii73E_EsLnHpgO8QUc",
           "msgtype":"news",
           "news":{"articles": articles}}
 
