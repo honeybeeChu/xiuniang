@@ -1,8 +1,5 @@
-// Place all the styles related to the welcome controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
 html {height: 100%; min-height: 100%;}
-body {height: 100%; min-height: 100%;background-color: red;}
+body {height: 100%; min-height: 100%;}
 img:not([src*="/"]){visibility: hidden;}
 body:after{
   content:" ";
@@ -40,7 +37,7 @@ a:link { text-decoration: none;}
 .mtn { margin-top: 5px !important;}
 .mtm { margin-top: 10px !important;}
 .mtx { margin-top: 15px !important;}
-.u_null_text_c {padding:5px; text-align:center;}
+.u_null_text_c {padding:5px; text-align:center;}	
 
 
 .u_app_version p,

@@ -1,0 +1,81 @@
+<%= content_for :css do %>
+    <%= stylesheet_link_tag 'welcome/show', 'data-turbolinks-track' => true %>
+<% end %>
+
+<div class="modal fade" id="messageModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true" id="messageModalClose">×</button>
+        <h4 class="modal-title" id="messageModalLabel">提示信息</h4>
+      </div>
+      <div class="modal-body" id="messageModalBody">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" id="messageModalCloseButton">Close
+        </button>
+        <a href="http://www.baidu.com" class="btn btn-primary" id="messageModalButton">Save changes</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="messageModalRemind" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content" style="opacity:0.8;">
+      <div class="modal-body text-center" id="messageModalRemindBody">
+        操作后提示内容
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="u_body">
+  <div id="sdetail_box">
+    <header class="u_header">
+      <span class="overflow">南京虹悦城店</span>
+      <a class="icon l icon3" href="javascript:history.go(-1);"></a>
+    </header>
+    <div class="u_box" style="padding:0px;">
+      <div style="padding:10px;">
+        <section id="l-map" class="amap-container" style="height: 245.2px; position: relative;">
+
+        </section>
+      </div>
+      <article class="u_store_info" style="background:#fff;" id="u_store_info">
+        <div>
+          <h1>南京虹悦城店</h1>
+          <address>南京市雨花台区应天大街619号南京虹悦城1-2F（徒步10分钟至地铁中华门站）</address>
+          <tel>025-52275686</tel>
+        </div>
+        <div>
+          <a href="tel:025-52275686" style="text-indent:2em; background:url(http://m.uniqlo.cn/html5/images/SDetail_phone.png) no-repeat #FAFAFA 25% center; background-size:30px auto;">拨打电话</a>
+          <a style="text-indent:2em; background:url(http://m.uniqlo.cn/html5/images/SDetail_path.png) no-repeat #FAFAFA 25% center; background-size:30px auto;" href="javascript:showGPS();">线路导航</a>
+        </div>
+        <div>
+        <div>
+        <p style="font-size:13px; line-height:20px; color:#737373;">营业时间</p>
+          周一至周日 10:00-22:00
+        </div>
+        </div>
+        <div>
+          <div>
+            <p style="font-size:13px; line-height:20px; color:#737373;">销售范围</p>
+            男装·女装·童装·婴幼儿装
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+  <div id="bigmap_box" class="u_hidden">
+    <header class="u_header">
+      <span class="overflow">南京虹悦城店</span>
+      <a class="icon l icon3" href="javascript:$('#sdetail_box').show();$('#bigmap_box').hide();"></a>
+    </header>
+    <div id="l-map-big" style="height: 573px;"></div>
+  </div>
+</div>
+
+
+
