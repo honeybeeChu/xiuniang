@@ -34,8 +34,12 @@ WeixinRailsMiddleware::WeixinController.class_eval do
 
       articles = Array.new
       storeHash.each do |key,value|
-        _title = value[:branch_name].nil? "#{value[:business_name]}的距离是#{key}千米":"#{value[:business_name]}(#{value[:branch_name]})的距离是#{key}千米"
-        article={"title":_title,"description":"最近店铺距离",
+        if value[:branch_name].nil?
+          @_title = "#{value[:business_name]}的距离是#{key}千米"
+        else
+          @_title = "#{value[:business_name]}(#{value[:branch_name]})的距离是#{key}千米"
+        end
+        article={"title":@_title,"description":"最近店铺距离",
                  "url":"https://wap.koudaitong.com/v2/showcase/mpnews?alias=x1rluidp&spm=m1468164257765106413412512.autoreply",
                  "picurl":"http://mmbiz.qpic.cn/mmbiz/pZtBlJ86VibocrMbpbVQLib0Ao7Txt9YtewqCbGKksB8sonLBTLdxVwuIUjv7JrsTTQ7ns7g56T2qHxryy7D0Ldw/0?wx_fmt=jpeg"}
 
