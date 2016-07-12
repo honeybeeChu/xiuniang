@@ -4,9 +4,6 @@ class WelcomeController < ApplicationController
   end
 
   def show
-    storeid = params[:storeid]
-
-
-    puts storeid
+    @store = Store.find(params[:storeid])
   end
 end
