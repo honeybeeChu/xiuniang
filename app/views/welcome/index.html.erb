@@ -1,15 +1,86 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-  <title>微信认证后台管理系统</title>
-  <meta charset="UTF-8"/>
+<%= content_for :css do %>
+    <%= stylesheet_link_tag 'welcome/index', 'data-turbolinks-track' => true %>
+<% end %>
+<%= content_for :js do %>
+    <%= javascript_include_tag 'http://api.map.baidu.com/api?v=2.0&ak=L6tV0zhkiNFQnuYIWdIC39wcuHMRR5ML&s=1','data-turbolinks-track' => false %>
+<% end %>
 
-</head>
-<body>
-<h1>
-    <a href="http://common.diditaxi.com.cn/general/webEntry?maptype=wgs&fromlat=39.98096907577634&fromlng=116.30000865410719&channel=71918"
-       >去打车</a>
-  欢迎进入测试页面哦．．！！
-</h1>
-</body>
-</html>
+<div class="u_body">
+  <div id="sdetail_box">
+    <header class="u_header">
+
+      <%	if @store.branch_name != nil and  @store.branch_name != ""%>
+          <span class="overflow"><%= @store.branch_name %></span>
+      <% else %>
+          <span class="overflow"><%= @store.business_name%></span>
+      <% end %>
+
+      <a class="icon l icon3" href="javascript:history.go(-1);"></a>
+    </header>
+    <div class="u_box" style="padding:0px;">
+      <div style="padding:10px;">
+        <section id="l-map" class="amap-container" style="height: 245px; position: relative;">
+          <script type="text/javascript">
+            var map = new BMap.Map("l-map");
+            // 创建地图实例
+            var point = new BMap.Point(<%= @store.longitude%>,<%= @store.latitude%>);  // 创建点坐标
+            map.centerAndZoom(point, 15);                 // 初始化地图，设置中心点坐标和地图级别
+            var marker = new BMap.Marker(point);        // 创建标注
+            map.addOverlay(marker);
+
+            $("#l-map").on("click",function(){
+              window.location.href="http://localhost:3000/welcome/show?lat=<%= @store.latitude%>&log=<%= @store.longitude%>&name=<%= @store.branch_name%>"
+//              window.location.href="http://xiuniang.yaxin-nanjing.com/welcome/show?lat=<%= @store.latitude%>&log=<%= @store.longitude%>&name=<%= @store.branch_name%>"
+            });
+
+          </script>
+        </section>
+      </div>
+      <article class="u_store_info" style="background:#fff;" id="u_store_info">
+        <div>
+          <%	if @store.branch_name != nil and  @store.branch_name != ""%>
+              <h1><%=	@store.branch_name %></h1>
+          <% else %>
+              <h1><%=	@store.business_name %></h1>
+          <% end %>
+          <address><%=	@store.province %><%=	@store.city %><%=	@store.district %><%=	@store.address %></address>
+          <tel><%=	@store.telephone %></tel>
+        </div>
+        <div>
+          <a href="tel:<%=	@store.telephone %>" style="text-indent:2em; background:url(http://m.uniqlo.cn/html5/images/SDetail_phone.png) no-repeat #FAFAFA 25% center; background-size:30px auto;">拨打电话</a>
+          <a style="text-indent:2em; background:url(http://m.uniqlo.cn/html5/images/SDetail_path.png) no-repeat #FAFAFA 25% center; background-size:30px auto;" href="javascript:showGPS();">线路导航</a>
+        </div>
+
+        <%	if @store.branch_name != nil and  @store.branch_name != ""%>
+            <a class="didi-btn"
+               href="http://common.diditaxi.com.cn/general/webEntry?maptype=wgs&tolat=<%=@store.latitude%>&tolng=<%=@store.longitude%>&toaddr=<%=@store.address%>&toname=<%=@store.branch_name%>&channel=71918">滴滴打车</a>
+        <% else %>
+            <a class="didi-btn"
+               href="http://common.diditaxi.com.cn/general/webEntry?maptype=wgs&tolat=<%=@store.latitude%>&tolng=<%=@store.longitude%>&toaddr=<%=@store.address%>&toname=<%=@store.business_name%>&channel=71918">滴滴打车</a>
+        <% end %>
+        <div>
+          <div>
+            <p style="font-size:13px; line-height:20px; color:#737373;">营业时间</p>
+            周一至周日 <%=	@store.open_time %>
+          </div>
+        </div>
+        <div>
+          <div>
+            <p style="font-size:13px; line-height:20px; color:#737373;">销售范围</p>
+            男装·女装·家居·家纺·配饰
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+  <div id="bigmap_box" class="u_hidden">
+    <header class="u_header">
+      <span class="overflow"><%=	@store.branch_name %></span>
+      <a class="icon l icon3" href="javascript:$('#sdetail_box').show();$('#bigmap_box').hide();"></a>
+    </header>
+    <div id="l-map-big" style="height: 573px;"></div>
+  </div>
+</div>
+
+
+

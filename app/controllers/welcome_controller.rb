@@ -1,9 +1,14 @@
 class WelcomeController < ApplicationController
   def index
-
+    @store = Store.find(params[:storeid])
   end
 
   def show
-    @store = Store.find(params[:storeid])
+    @lat = params[:lat]
+    @log = params[:log]
+    @storeName = params[:name]
+
   end
+
+
 end
