@@ -31,19 +31,19 @@ WeixinRailsMiddleware::WeixinController.class_eval do
       # 将用户发来的经纬度信息，转换成百度的经纬度
       baiduresult = http_get_baidu @lx,@ly
 
-      @lat =  baiduresult['result'][0]['x']
-      @log =  baiduresult['result'][0]['y']
+      @current_lat =  baiduresult['result'][0]['x']
+      @current_log =  baiduresult['result'][0]['y']
 
-      Rails.logger.info("baidu current x is #{@lat}")
-      Rails.logger.info("baidu current y is #{@lat}")
+      Rails.logger.info("baidu 结果 x is #{@current_lat}")
+      Rails.logger.info("baidu 结果 y is #{@current_log}")
 
-      storeHash = getNearStores @lat,@log
+      storeHash = getNearStores @current_lat,@current_log
 
       articles = Array.new
       storeHash.each do |key,value|
         @_title = "#{value[:business_name]}#{value[:branch_name]}: #{key}公里"
         article={"title":@_title,"description":"最近店铺距离",
-                 "url":"http://xiuniang.yaxin-nanjing.com/welcome/index?storeid=#{value[:id]}&lat="+@lat+"&log="+@log,
+                 "url":"http://xiuniang.yaxin-nanjing.com/welcome/index?storeid=#{value[:id]}&lat=#{@current_lat}&log=#{@current_log}",
                  "picurl":"http://mmbiz.qpic.cn/mmbiz/pZtBlJ86VibocrMbpbVQLib0Ao7Txt9YtewqCbGKksB8sonLBTLdxVwuIUjv7JrsTTQ7ns7g56T2qHxryy7D0Ldw/0?wx_fmt=jpeg"}
 
         articles.push(article)
