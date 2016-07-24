@@ -34,8 +34,8 @@ WeixinRailsMiddleware::WeixinController.class_eval do
       @lat =  baiduresult['result'][0]['x']
       @log =  baiduresult['result'][0]['y']
 
-      Rails.logger("baidu current x is #{@lat}")
-      Rails.logger("baidu current y is #{@lat}")
+      Rails.logger.info("baidu current x is #{@lat}")
+      Rails.logger.info("baidu current y is #{@lat}")
 
       storeHash = getNearStores @lat,@log
 
@@ -317,8 +317,8 @@ WeixinRailsMiddleware::WeixinController.class_eval do
     distanceArray = Array.new
     storeHash = Hash.new
     Store.all.each do |store|
-      Rails.logger(store[:latitude])
-      Rails.logger(store[:longitude])
+      Rails.logger.info(store[:latitude])
+      Rails.logger.info(store[:longitude])
 
       distance = getDistance store[:latitude].to_f, store[:longitude].to_f,latitude,logitude
       distanceArray.push(distance)
