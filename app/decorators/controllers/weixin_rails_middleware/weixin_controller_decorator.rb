@@ -29,7 +29,7 @@ WeixinRailsMiddleware::WeixinController.class_eval do
 
 
       # 将用户发来的经纬度信息，转换成百度的经纬度
-      baiduresult = http_get_baidu @lx,@ly
+      baiduresult = JSON.parse(http_get_baidu @lx,@ly)
 
       @current_lat =  baiduresult['result'][0]['x']
       @current_log =  baiduresult['result'][0]['y']
@@ -338,6 +338,7 @@ WeixinRailsMiddleware::WeixinController.class_eval do
     require "open-uri"
     #如果有GET请求参数直接写在URI地址中
     uri = "http://api.map.baidu.com/geoconv/v1/?coords=#{log},#{lat}&ak=#{BAIDU_AK}"
+    Rails.logger.info("百度改变维度地址#{uri}")
     html_response = nil
     open(uri) do |http|
       html_response = http.read
