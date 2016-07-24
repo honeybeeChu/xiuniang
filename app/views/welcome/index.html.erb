@@ -29,7 +29,6 @@
             map.addOverlay(marker);
 
             $("#l-map").on("touchend",function(){
-//              window.location.href="http://localhost:3000/welcome/show?lat=<%= @store.latitude%>&log=<%= @store.longitude%>&name=<%= @store.branch_name%>"
               window.location.href="http://xiuniang.yaxin-nanjing.com/welcome/show?lat=<%= @store.latitude%>&log=<%= @store.longitude%>&name=<%= @store.branch_name%>"
             });
 
@@ -48,7 +47,8 @@
         </div>
         <div>
           <a href="tel:<%=	@store.telephone %>" style="text-indent:2em; background:url(http://m.uniqlo.cn/html5/images/SDetail_phone.png) no-repeat #FAFAFA 25% center; background-size:30px auto;">拨打电话</a>
-          <a style="text-indent:2em; background:url(http://m.uniqlo.cn/html5/images/SDetail_path.png) no-repeat #FAFAFA 25% center; background-size:30px auto;" href="javascript:showGPS();">线路导航</a>
+          <a style="text-indent:2em; background:url(http://m.uniqlo.cn/html5/images/SDetail_path.png) no-repeat #FAFAFA 25% center; background-size:30px auto;"
+             href="http://xiuniang.yaxin-nanjing.com/welcome/navigate?storeid=<%=@store.id%>&lat=<%=@lat%>&log=<%= @log%>&name=<%= @store.branch_name%>">线路导航</a>
         </div>
 
         <%	if @store.branch_name != nil and  @store.branch_name != ""%>

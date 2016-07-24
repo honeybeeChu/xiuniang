@@ -25,13 +25,22 @@ WeixinRailsMiddleware::WeixinController.class_eval do
       @scale = @weixin_message.Scale
       @label = @weixin_message.Label
 
-      storeHash = getNearStores @lx,@ly
+
+
+
+      # 将用户发来的经纬度信息，转换成百度的经纬度
+      baiduresult = http_get_baidu @lx,@ly
+
+      @lat =  baiduresult['result'][0]['x']
+      @log =  baiduresult['result'][0]['y']
+
+      storeHash = getNearStores @lat,@log
 
       articles = Array.new
       storeHash.each do |key,value|
         @_title = "#{value[:business_name]}#{value[:branch_name]}: #{key}公里"
         article={"title":@_title,"description":"最近店铺距离",
-                 "url":"http://xiuniang.yaxin-nanjing.com/welcome/index?storeid=#{value[:id]}",
+                 "url":"http://xiuniang.yaxin-nanjing.com/welcome/index?storeid=#{value[:id]}&lat="+@lat+"&log="+@log,
                  "picurl":"http://mmbiz.qpic.cn/mmbiz/pZtBlJ86VibocrMbpbVQLib0Ao7Txt9YtewqCbGKksB8sonLBTLdxVwuIUjv7JrsTTQ7ns7g56T2qHxryy7D0Ldw/0?wx_fmt=jpeg"}
 
         articles.push(article)
@@ -284,9 +293,6 @@ WeixinRailsMiddleware::WeixinController.class_eval do
 
 
 
-
-
-
     private
   # 根据两个点的经纬度计算两个点的距离（直线距离）
   def getDistance lat1,lng1, lat2, lng2
@@ -322,6 +328,16 @@ WeixinRailsMiddleware::WeixinController.class_eval do
 
   end
 
+  def http_get_baidu lat ,log
+    require "open-uri"
+    #如果有GET请求参数直接写在URI地址中
+    uri = "http://api.map.baidu.com/geoconv/v1/?coords=#{log},#{lat}&ak=#{BAIDU_AK}"
+    html_response = nil
+    open(uri) do |http|
+      html_response = http.read
+    end
+    return html_response
+  end
 
 
 end

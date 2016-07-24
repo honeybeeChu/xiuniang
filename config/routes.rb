@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   # get 'products/:id' => 'catalog#view'
   get 'welcome/show'
   get 'welcome/index'
+  get "welcome/navigate"
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
