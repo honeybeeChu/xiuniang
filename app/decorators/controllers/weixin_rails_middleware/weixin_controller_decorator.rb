@@ -31,11 +31,8 @@ WeixinRailsMiddleware::WeixinController.class_eval do
       # 将用户发来的经纬度信息，转换成百度的经纬度
       baiduresult = JSON.parse(http_get_baidu @lx,@ly)
 
-      @current_lat =  baiduresult['result'][0]['x']
-      @current_log =  baiduresult['result'][0]['y']
-
-      Rails.logger.info("baidu 结果 x is #{@current_lat}")
-      Rails.logger.info("baidu 结果 y is #{@current_log}")
+      @current_lat =  baiduresult['result'][0]['y']
+      @current_log =  baiduresult['result'][0]['x']
 
       storeHash = getNearStores @current_lat,@current_log
 
