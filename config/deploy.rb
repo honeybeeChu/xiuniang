@@ -10,7 +10,7 @@ require 'mina/rvm'    # for rvm support. (http://rvm.io)
 #   repository   - Git repo to clone from. (needed by mina/git)
 #   branch       - Branch name to deploy. (needed by mina/git)
 
-set :domain, '121.40.17.223'
+set :domain,'121.43.96.111'
 set :deploy_to, '/home/linkage/work/xiuniang'
 set :repository, 'https://github.com/honeybeeChu/xiuniang.git' #'git@github.com:honeybeeChu/xiuniang.git'
 set :branch, 'master'
