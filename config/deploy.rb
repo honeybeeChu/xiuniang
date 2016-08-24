@@ -109,9 +109,9 @@ task :deploy => :environment do
     invoke :'git:clone'
     invoke :'deploy:link_shared_paths'
     invoke :'bundle:install'
-    invoke :'rails:db_migrate'
-    invoke :'rails:assets_precompile'
-    invoke :'deploy:cleanup'
+    # invoke :'rails:db_migrate'
+    # invoke :'rails:assets_precompile'
+    # invoke :'deploy:cleanup'
     # invoke :'puma:on_restart'
 
     to :launch do
