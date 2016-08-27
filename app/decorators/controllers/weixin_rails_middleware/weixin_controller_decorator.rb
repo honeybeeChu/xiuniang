@@ -46,7 +46,7 @@ WeixinRailsMiddleware::WeixinController.class_eval do
         articles.push(article)
       end
 
-      @client = WeixinAuthorize::Client.new("wxa4de3c29bddd316e", "6d5dd9526242c753746ae3a8b54affe6")
+      @client = WeixinAuthorize::Client.new("wx9faf547b0e25cf9e", "438a11a1c61fff7b756fc708046a5546")
 
       params = {
           "touser":@weixin_message.FromUserName,
