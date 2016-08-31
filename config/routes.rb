@@ -10,6 +10,12 @@ Rails.application.routes.draw do
   get 'welcome/show'
   get 'welcome/index'
   get "welcome/navigate"
+
+  get 'membership/index'  #会员信息的初始页面
+  get 'membership/sendsms'
+  get 'membership/opencardsubmit'
+  post 'membership/redirect'
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

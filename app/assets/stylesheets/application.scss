@@ -13,4 +13,7 @@
  */
 @import "bootstrap-sprockets";
 @import "bootstrap";
+*= require_self
+*= require_tree
+*= require jquery.mobile
 

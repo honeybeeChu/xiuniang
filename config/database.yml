@@ -1,33 +1,33 @@
-#default: &default
-#  adapter: sqlite3
-#  pool: 5
-#  timeout: 5000
+default: &default
+  adapter: sqlite3
+  pool: 5
+  timeout: 5000
+
+development:
+  <<: *default
+  database: db/development.sqlite3
+
+test:
+  <<: *default
+  database: db/test.sqlite3
+
+production:
+  <<: *default
+  database: db/development.sqlite3
+
+
+# default: &default
+#   adapter: mysql2
+#   encoding: utf8
+#   pool: 5
+#   username: linkage
+#   password:  !QAZ2wsx
+#   host: localhost
 #
-#development:
-#  <<: *default
-#  database: db/development.sqlite3
+# production:
+#   <<: *default
+#   database: xiuniang
 #
-#test:
-#  <<: *default
-#  database: db/test.sqlite3
-#
-#production:
-#  <<: *default
-#  database: db/development.sqlite3
-
-
- default: &default
-   adapter: mysql2
-   encoding: utf8
-   pool: 5
-   username: linkage
-   password:  !QAZ2wsx            #wifiadmin50
-   host: 127.0.0.1
-
- production:
-   <<: *default
-   database: xiuniang
-
 # test:
 #   <<: *default
 #   database: xiuniang
