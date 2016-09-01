@@ -1,5 +1,7 @@
 class MembershipController < ApplicationController
   require "open-uri"
+  require 'net/https'
+  require 'uri'
   layout 'main'
 
   def index
@@ -67,6 +69,22 @@ class MembershipController < ApplicationController
   # 跳转会员信息页面
   def showInfo
 
+  end
+
+
+
+  def url_encode(str)
+    str.to_s.gsub(/[^a-zA-Z0-9_\-.]/n){ sprintf("%%%02X", $&.unpack("C")[0]) }
+  end
+
+  def post(url)
+    uri = URI.parse(url)
+    http = Net::HTTP.new(uri.host, uri.port)
+    http.use_ssl = true if uri.scheme == "https"
+    http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+    request = Net::HTTP::Get.new(uri.request_uri)
+    response = http.request(request)
+    return JSON.parse(response.body)
   end
 
 end
