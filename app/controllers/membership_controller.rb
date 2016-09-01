@@ -5,12 +5,12 @@ class MembershipController < ApplicationController
   layout 'main'
 
   def index
-    redirect_uri = url_encode(APP_SERVER+'/membership/redirect')
+    redirect_uri = "#{APP_SERVER}/membership/redirect"
 
     MEMBERSHIP_LOGGER.info "weixin redirect url: #{redirect_uri}"
     code_url =WX_OAUTH_CODE_URL+'&redirect_uri='+redirect_uri+'&response_type=code&scope=snsapi_base&state=1#wechat_redirect'
 
-    MEMBERSHIP_LOGGER.info "weixin code_url url: #{redirect_uri}"
+    MEMBERSHIP_LOGGER.info "weixin code_url url: #{code_url}"
     redirect_to code_url
 
   end
