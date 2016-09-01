@@ -4,16 +4,24 @@ class MembershipController < ApplicationController
 
   def index
     redirect_uri = url_encode(APP_SERVER+'/membership/redirect')
-    code_url =WX_OAUTH_CODE_URL+'&redirect_uri='+redirect_uri+'&response_type=code&scope=snsapi_base&state=1#wechat_redirect'
-    redirect_to code_url
 
+    MEMBERSHIP_LOGGER.info "weixin redirect url: #{redirect_uri}"
+    code_url =WX_OAUTH_CODE_URL+'&redirect_uri='+redirect_uri+'&response_type=code&scope=snsapi_base&state=1#wechat_redirect'
+
+    MEMBERSHIP_LOGGER.info "weixin code_url url: #{redirect_uri}"
+    redirect_to code_url
 
   end
 
   # 微信的二次重定向地址，获取用户的个人信息
   def redirect
     code = params[:code]
+    MEMBERSHIP_LOGGER.info "code value is #{code}"
+
     url = WX_OAUTH_REDIRECT_RUL+code+'&grant_type=authorization_code'
+
+    MEMBERSHIP_LOGGER.info "weixin getuserinfo url is #{url}"
+
     data = post(url)
     if data['errcode'].nil?
       @openid = data['openid']

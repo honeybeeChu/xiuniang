@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   get 'membership/index'  #会员信息的初始页面
   get 'membership/sendsms'
   get 'membership/opencardsubmit'
-  post 'membership/redirect'
+  get 'membership/redirect'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
