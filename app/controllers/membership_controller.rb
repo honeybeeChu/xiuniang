@@ -26,11 +26,20 @@ class MembershipController < ApplicationController
 
     data = post(url)
     if data['errcode'].nil?
+      @client = WeixinAuthorize::Client.new(WX_APPID, WX_SECRET)
       @openid = data['openid']
+
+      user_info = @client.user(ENV["OPENID"])
+
+      MEMBERSHIP_LOGGER.info user_info.to_json
+
+      MEMBERSHIP_LOGGER.info "用户的openid是 #{@openid}"
       #如果没有注册会员信息，那么就跳转到开卡会员注册的页面
       render "openCard"
 
       #如果已经注册是会员，那么跳转到会员的信息页面
+    else
+      MEMBERSHIP_LOGGER.error "获取用户信息失败"
     end
   end
 
