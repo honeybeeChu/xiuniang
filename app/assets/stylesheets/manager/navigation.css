@@ -1,0 +1,305 @@
+﻿/*topbar*/
+.topbar {
+    position:fixed; 
+    top:0; 
+    z-index:1000; 
+    width:100%;
+    height: 22px; 
+    line-height: 22px; 
+    padding:0 30px;
+    background:#171f2a; 
+    color:#a6afbb;  
+    font-size:12px; 
+}
+
+.topbar-row { 
+    max-width: 1000px;
+    margin:0 auto; 
+}
+
+.topbar a {
+    color: #a6afbb;
+}
+
+.topbar a:hover {
+    color: #fff; 
+    text-decoration: underline;
+}
+
+/*nav*/
+.dap-navbar {
+    top:22px;
+} 
+.dap-nav-padding {
+    padding-top: 60px;
+    padding-bottom: 10px;
+}
+.dap-nav-logo {
+    height: 48px;
+    line-height: 48px;
+    float: left;
+    padding-right:20px;
+    font-size: 18px;
+    letter-spacing: 1px;
+    color: white;
+    vertical-align: middle;
+    border-right:1px solid #1889c0;
+}
+
+.dap-nav-logo img {
+    padding-right: 10px;
+    width: 34px;
+    vertical-align: middle;
+}
+
+.dap-navbar .navigation li {
+    float: left;
+    height: 40px;
+    position: relative;
+    list-style: none;
+}
+
+.dap-navbar .navigation li.last {
+    background: none;
+}
+
+.dap-navbar .navigation li a {
+    text-decoration: none;
+}
+
+.dap-navbar .navbar-css {
+    background: #017eba;
+}
+
+.dap-navbar .navbar-css ul {
+    font-size: 16px;
+}
+.dap-navbar-pipe{
+    position:absolute; 
+    right:-2px; 
+    color: #1594d1;
+}
+.dap-navbar.navbar {
+    position: fixed;
+    z-index: 1040;
+    right: 0;
+    left: 0;
+    margin-bottom: 0;
+}
+
+.dap-navbar.navbar-inverse {
+    background: #017eba;
+    border: none;
+}
+
+.dap-navbar.navbar-inverse .navbar-collapse {
+    position:absolute; 
+    left:169px; 
+    top:0; 
+    width:490px; 
+    border:0;
+}
+@media (max-width: 767px){
+   .dap-navbar.navbar-inverse .navbar-collapse {
+    position:static; 
+    margin:0;
+    padding-left:0; 
+    width:100%;} 
+}
+.dap-navbar.navbar-inverse .navbar-nav>li>a {
+    padding-right: 30px;
+    padding-left: 30px;
+    color: #fff;
+}
+.dap-navbar .navbar-header {
+    float:none;
+    margin-right:0;
+    margin-left:0;
+}
+.dropdown-menu>.active>a, .dropdown-menu>.active>a:focus, .dropdown-menu>.active>a:hover {
+    background: #b9dced;
+    color: #333
+}
+
+.dap-navbar.navbar-inverse .navbar-nav>.open>a, .dap-navbar.navbar-inverse .navbar-nav>.open>a:focus,
+    .dap-navbar.navbar-inverse .navbar-nav>.open>a:hover {
+    background: #0172a8;
+}
+
+.dap-navbar.navbar-inverse .navbar-nav>li.active>a, .dap-navbar.navbar-inverse .navbar-nav>li.active>a:focus,
+    .dap-navbar.navbar-inverse .navbar-nav>li.active>a:hover {
+    background: #0172a8;
+}
+.dap-navbar.navbar-inverse .navbar-nav>li>a .fa {
+    display:inline-block; 
+    padding-right:10px;
+}
+.dap-navbar.navbar-inverse .navbar-nav>li>a .fa-left {
+    padding-left:12px;
+}
+.dap-navbar.navbar-inverse .navbar-nav>li.open>a .fa-angle-down:before {
+    content: "\f106";
+}
+/*下拉菜单*/
+.dap-navbar .dropdown-menu {
+    padding:0; 
+    border:1px solid #ddd;
+}
+.dap-dropdown-menu-inner {
+    background:#f0f8fa; 
+    padding:10px 25px 20px 25px; 
+}
+.dap-dropdown-menu-ttl {
+    width:90px; 
+    padding-top:4px; 
+    padding-right:20px; 
+    font-weight: bold;
+}
+.dap-dropdown-menu-listitem {
+    margin-left:90px;
+}
+.dap-dropdown-menu-listitem>li {
+    float:left; 
+    width:25%; 
+    height: 36px; 
+    line-height: 36px; 
+    font-size: 14px; 
+}
+.dap-dropdown-menu-listitem>li>a {
+    display:block; 
+    white-space: nowrap; 
+    height:100%; 
+    padding:0 10px; 
+    color:#586376; 
+    vertical-align: middle;
+}
+.dap-dropdown-menu-listitem>li>a:hover {
+    color:#0189cb; 
+}
+.dap-dropdown-menu-listitem>li.active>a {
+    color:#0189cb; 
+}
+.dap-dropdown-menu-listitem-cp {
+    margin-left:0;
+}
+.dap-dropdown-menu-listitem-cp>li {
+    float:none; 
+    width:auto;
+}
+.dap-dropdown-menu-service {
+    left:-150px;
+}
+.dropdown-menu.dap-dropdown-menu-service {
+    width:710px;
+}
+.dap-dropdown-menu-business {
+    width:548px;
+}
+.dap-dropdown-menu-service .dap-dropdown-menu-listitem { 
+    margin-left:0;
+}
+.dap-dropdown-menu-service .dap-dropdown-menu-listitem>li {
+    float:none; 
+    width:auto;
+}
+.dap-dropdown-menu-service .dap-dropdown-menu-row {
+    margin-left:90px;
+}
+.dap-dropdown-menu-secttl {
+    color: #999; 
+    padding:4px 10px;
+}
+.dap-dropdown-menu-listitem .icon {
+    font-size: 18px; 
+    padding-right:5px; 
+    vertical-align: middle;
+}
+.dap-dropdown-menu-service .dap-dropdown-menu-listitem .icon {
+    font-size:16px;
+}
+.dap-navbar.navbar-inverse .navbar-nav .open .dropdown-menu  .divider {
+    background-color:#ddd;
+}
+/*设置-消息*/
+.dap-navbar-right {
+    float:right; 
+}
+.dap-navbar-right .navbar-nav {
+    border-right:1px solid #1889c0; 
+    margin:0px 0; 
+}
+.dap-navbar-right .navbar-nav>li {
+    display:inline-block; 
+    float:none; 
+    border-left:1px solid #1889c0; 
+}
+@media (max-width: 767px){
+    .dap-navbar-right .navbar-nav>li {
+        padding-top:5px; 
+        padding-bottom: 5px;
+    }
+}
+.dap-navbar .dap-navbar-right .navbar-nav>li>a {
+    padding-left:20px;
+    padding-right:20px;
+}
+.dap-navbar .dap-navbar-right .navbar-nav>li>a .fa {
+    padding-right:0;
+}
+.dap-none-mess, .dap-has-mess {
+    background:#0172a8; 
+    border-radius:4px; 
+    padding:2px 7px;
+}
+.dap-has-mess {
+    background:#f0a503;
+}
+.dap-message-outer {
+    position:relative; 
+    width:276px; 
+    top:0; 
+    right:0;
+    background:#e7f3f8; 
+}
+.dap-message-list {
+    position:fixed;  
+    z-index:999; 
+    width:inherit; 
+    top:0; 
+    right:0; 
+    right:-500px; 
+    padding:80px 15px 15px; 
+    height: 100%; 
+    background:#e7f3f8; 
+    -webkit-box-shadow:0 6px 12px rgba(0,0,0,.175);
+    box-shadow:0 6px 12px rgba(0,0,0,.175);
+}
+.dap-message-list>ul>li {
+    padding:6px 0; 
+    position:relative;
+}
+.dap-message-list .dap-time {
+    color: #999; 
+    position:absolute; 
+    right:10px;  
+    white-space: nowrap;
+}
+.dap-close {
+    position:absolute; 
+    right:20px; 
+    color:#999; 
+    font-size:16px;
+}
+/*收缩菜单*/
+.dap-navbar.navbar-inverse .navbar-toggle {
+    background:none; 
+    border:0; 
+    padding:9px 20px;
+    margin-right:0;
+}
+.dap-navbar.navbar-inverse .navbar-toggle:hover {
+    background:none; 
+}
+.dap-navbar.navbar-inverse .navbar-toggle:hover .icon-bar {
+    background:#1da3e4;
+}

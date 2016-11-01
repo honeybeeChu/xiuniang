@@ -44,6 +44,17 @@ gem 'sass-rails', '>= 3.2'
 # puma
 gem 'puma'
 
+gem "redis-namespace"
+gem 'redis-rails'
+gem 'redis-rack-cache' # optional
+
+gem 'sidekiq'
+# gem 'sidetiq'
+
+gem 'clockwork'
+gem 'will_paginate'
+
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'

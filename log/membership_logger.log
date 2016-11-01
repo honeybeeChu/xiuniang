@@ -5,3 +5,5 @@
 <smsid>430410929</smsid>
 </SubmitResult>
 
+2016-09-05 10:39:25 INFO weixin redirect url: http://wechat.xiuniang.cn/membership/redirect
+2016-09-05 10:39:25 INFO weixin code_url url: https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx9faf547b0e25cf9e&redirect_uri=http://wechat.xiuniang.cn/membership/redirect&response_type=code&scope=snsapi_base&state=1#wechat_redirect

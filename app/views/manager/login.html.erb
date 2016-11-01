@@ -1,0 +1,30 @@
+<div  class="box clearfix">
+  <form action="/manager/loginCheck" method="get">
+    <div class=" login_left fl">
+      <div style="padding-top:20px;">
+        <%= image_tag "manager/ico.png",:height => '190px',:width => '150px' %>
+      </div>
+      <p style="padding-top:10px;">绣娘营销管理平台</p>
+    </div>
+    <!--<form action="/logincheck" method="get"></form>-->
+
+
+
+
+
+    <div class="login_right  fl">
+      <div style="margin-top:20px;">Login</div>
+      <div class="row mt15" >
+        <input type="text" autocomplete="off" size="25" value="" placeholder="账号" accesskey="u" tabindex="1" class="required" name="username" id="username" style="color:#333;" onfocus="if(value=='账号'){this.style.color='#000';value=''}" onblur="if(value==''){this.style.color='#333';value='账号'}">
+      </div>
+      </br>
+      <div class="row">
+        <input type="password" autocomplete="off" size="25" value="" accesskey="p" tabindex="2" class="required password" name="password" id="password" placeholder="密码" style="color:#333;"  onfocus="if(value=='密码'){this.style.color='#000';value=''}" onblur="if(value==''){this.style.color='#333';value='密码'}">
+      </div>
+      </br></br>
+      <div class="row btn-row"  >
+        <input type="submit" value="登 录"  class="btn-submit"  id="loginBtn">
+      </div>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,84 @@
+<div class="crumb_box"><span class="c333">店员管理</span><span class="pl10 pr10 ">·</span><a href="#" class="c999">店员信息查看</a></div>
+<div class="well2 mt10">
+
+  <div class="form-horizontal onlineTools">
+    <div class="row-fluid" style="    margin-left: 20px;">
+      <div class="span10">
+        <%= form_tag(manager_dianyuan_path, method: "get") do %>
+            <%= label_tag(:DYMC, "店员姓名:") %>
+            <%= text_field_tag :DYMC , @current_dymc%>
+            <%= submit_tag "查询",class:"button  button-primary"  %>
+            <input type="reset" class="button ml10" value="重置"/>
+        <% end %>
+      </div>
+      <div class="span4" style="float: right;">
+        <a href="/manager/synchronizeDianyuan" class="button  button-primary" style="width: 88px;">同步数据</a>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="well">
+  <div class="mb10 clearfix">
+    <!--<div class="fl"><h4>角色列表</h4></div>-->
+    <!--<button href="#" class="button button-info fr"><i class="icon-white icon-plus"></i>新增角色</button>-->
+    <div class="fl"> 共查询到 <span class="text-danger">
+      <%= @dianyuan_account %>
+
+    </span> 个员工信息 </div>
+  </div>
+  <table class="table table-bordered table-striped table-head-bordered table-hover center ">
+    <thead>
+    <tr>
+      <th>序号</th>
+      <th>店员编号</th>
+      <th>所属店铺代码</th>
+      <th>店员名称</th>
+      <th>店员性别</th>
+      <!--<th>联系电话</th>-->
+      <th>手机号码</th>
+      <!--<th>邮箱</th>-->
+      <th>住址</th>
+      <th>会员卡二维码</th>
+    </tr>
+    </thead>
+    <tbody>
+    <%if(@Dianyuans != nil) %>
+        <%@Dianyuans.each_with_index do |dianyuan,index| %>
+
+        <tr>
+          <td><%=(@current_page.to_i - 1)*10+index+1%></td>
+          <td><%=dianyuan.DYDM %></td>
+          <td><%=dianyuan.KHDM %></td>
+          <td><%=dianyuan.DYMC %></td>
+
+          <td><%=dianyuan.DYXB == "0" ? "女" : "男" %></td>
+
+          <!--<td><%=dianyuan.PHONE==nil ? "无": dianyuan.PHONE %></td>-->
+          <td><%=dianyuan.MOBILE==nil ? "无": dianyuan.MOBILE %></td>
+          <!--<td><%=dianyuan.EMAIL==nil ? "无": dianyuan.EMAIL %></td>-->
+          <td><%=dianyuan.ADDRESS==nil ? "无": dianyuan.ADDRESS %></td>
+          <!--<td><%=dianyuan.IN_DATE==nil ? "无": dianyuan.IN_DATE %></td>-->
+          <td><%=link_to "下载"%></td>
+        </tr>
+        <%end%>
+    <%end%>
+
+    </tbody>
+  </table>
+</div>
+<div class="ad-page-outer" style="float: right;font-size: 15px;margin-top:0;">
+  <%= will_paginate @Dianyuans %>
+</div>
+
+
+</div>
+
+
+<script type="text/javascript">
+  $(function(){
+    $("#dianyuan_01").parent().parent().parent().slideDown(0);
+    $('#dianyuan_manager').addClass("active");
+    $("#dianyuan_01").addClass("on");
+  });
+
+</script>

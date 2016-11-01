@@ -5,6 +5,8 @@ class MembershipController < ApplicationController
   layout 'main'
 
   def index
+    # render "openCard"
+
     redirect_uri = "#{APP_SERVER}/membership/redirect"
 
     MEMBERSHIP_LOGGER.info "weixin redirect url: #{redirect_uri}"
@@ -30,9 +32,16 @@ class MembershipController < ApplicationController
       @openid = data['openid']
       MEMBERSHIP_LOGGER.info "用户的openid是 #{@openid}"
 
-      user_info = @client.user(@openid)
+      result_json = @client.user(@openid).to_json
+      MEMBERSHIP_LOGGER.info result_json
 
-      MEMBERSHIP_LOGGER.info user_info.to_json
+      if result_json[:code] == 0
+          userinfo = result_json[:result].to_json
+
+
+          userinfo[:subscribe]
+      end
+
 
 
       #如果没有注册会员信息，那么就跳转到开卡会员注册的页面

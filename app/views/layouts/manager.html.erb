@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="renderer" content="webkit">
+  <title>日志留存平台</title>
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+  <%= stylesheet_link_tag 'manager/global.css', 'data-turbolinks-track' => true %>
+  <%= stylesheet_link_tag 'manager/dpl.css', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'manager/jquery.js','data-turbolinks-track' => false %>
+
+</head>
+<body >
+<!--top-->
+<div class="wrap clearfix">
+  <div class="header">
+    <div class="w clearfix">
+      <div class="left_top fl">
+        <!--<img src="images/pia-logo.png">-->
+        <%= image_tag "manager/pia-logo.png"%>
+      </div>
+      <div class="user fr">
+        <div class="user-img">
+          <p><i class="iconfont icon-yonghu"></i><span>spark269</span><i class="iconfont icon-tuichu"></i><a href="" class="border-none">退出</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!--end-top-->
+<!--sidebar-->
+<div class="sidebar" id="leftbar">
+  <div class="menu" >
+    <div class="vtitle">
+      <a href="#">
+        <i class="iconfont icon_menu icon-shezhi"></i>
+        系统管理
+      </a>
+      <em class=" iconfont icon_menu icon-unfold"></em>
+    </div>
+    <div class="vcon" style="display: none;">
+      <ul class="menu_body clearfix">
+        <li  id="role" ><a href="javascript:;" >角色管理</a></li>
+        <li id="user"><a href="javascript:;">管理员管理</a></li>
+        <li id="rolesq"><a href="javascript:;">角色授权</a></li>
+      </ul>
+    </div>
+    <div class="vtitle" id="dianyuan_manager"><a href="#"><i class="iconfont icon_menu icon-wangluo"></i>店员管理</a><em class=" iconfont icon_menu icon-unfold"></em></div>
+    <div class="vcon" style="display: none;">
+      <ul class="menu_body clearfix">
+        <li id="ipbased">
+          <%= link_to '店员信息查询', manager_dianyuan_path, :id=>"dianyuan_01"%>
+        </li>
+        <li id="ipgw">
+          <%= link_to '店员信息观察', manager_dianyuan_path, :id=>"dianyuan_01"%>
+        </li>
+        <li id="ipgw">
+          <%= link_to '店员业务查询', manager_dianyuan_path, :id=>"dianyuan_01"%>
+        </li>
+      </ul>
+    </div>
+    <div class="vtitle"><a href="#"><i class="iconfont icon_menu icon-tongjitubiao"></i>统计报表</a><em class=" iconfont icon_menu icon-unfold"></em></div>
+    <div class="vcon" style="display: none;">
+      <ul class="menu_body clearfix">
+        <li id="yxchart"><a href="#javascript:;">运行日志报表</a></li>
+        <li id="zdchart"><a href="#javascript:;">终端统计报表</a></li>
+        <li id="yychart"><a href="javascript:;">应用统计报表</a></li>
+        <li id="xychart"><a href="javascript:;">协议统计报表</a></li>
+        <li id="zdpm"><a href="javascript:;">终端每日排名</a></li>
+        <li id="yypm"><a href="javascript:;">URL每日排名</a></li>
+      </ul>
+    </div>
+    <div class="vtitle"><a href="#"><i class="iconfont icon_menu icon-guanli"></i>能力开放管理</a><em class=" iconfont icon_menu icon-unfold"></em></div>
+    <div class="vcon" style="display: none;">
+      <ul class="menu_body clearfix">
+        <li id="nlManage"><a href="javascript:;">能力管理</a></li>
+        <li id="yyManage"><a href="javascript:;">应用管理</a></li>
+        <li id="sqManage"><a href="javascript:;">授权管理</a></li>
+        <li id="hmdManage"><a href="javascript:;">黑名单控制</a></li>
+        <li id="jkManage"><a href="javascript:;">接口操作日志</a></li>
+      </ul>
+    </div>
+    <div class="vtitle"><a href="#"><i class="iconfont icon_menu icon-jiankong"></i>系统监控</a><em class=" iconfont icon_menu icon-unfold"></em></div>
+    <div class="vcon" style="display: none;">
+      <ul class="menu_body clearfix">
+        <li id="systemMonitor"><a href="javascript:;">系统大屏监控</a></li>
+        <li id="hardwareMonitor"><a href="javascript:;">硬件资源监控</a></li>
+        <li id="serviceMonitor"><a href="javascript:;">软件服务监控</a></li>
+        <li id="systemAlarm"><a href="javascript:;">系统告警</a></li>
+        <li id="inspection"><a href="javascript:;">巡检</a></li>
+        <li id="dataMonitor"><a href="javascript:;">大数据集群监控</a></li>
+      </ul>
+    </div>
+
+
+
+  </div>
+</div>
+<div class="sidebar-bg"></div>
+<!--end-sidebar-->
+<!--main-->
+<div class="J_mainframe main" >
+  <div id="J_ajax_container" class="main-content" >
+    <%= content_for?(:content) ? yield(:content) : yield %>
+  </div>
+
+</div>
+
+
+
+
+<script>
+  $(function(){
+    //菜单隐藏展开
+    $('.vtitle').click(function(){
+      if(!$(this).hasClass("active")){
+        $('.vcon').slideUp();
+        $('.vcon').eq($('.vtitle').index($(this))).slideDown();
+        $(this).addClass('active').siblings().removeClass("active");
+      }
+
+    });
+
+    $('.menu_body >li >a').click(function(){
+      $('.menu_body >li >a').removeClass('on');
+      $(this).addClass('on');
+    });
+
+  });
+</script>
+</body>
+</html>

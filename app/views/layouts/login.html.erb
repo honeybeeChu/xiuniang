@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="renderer" content="webkit">
+  <title>绣娘管理平台－登录</title>
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <%= stylesheet_link_tag 'manager/login.css', 'data-turbolinks-track' => true %>
+</head>
+<body>
+<div class="bg_box"  style="position:relative; width:100%; height:100%; z-index:-1">
+  <!--<img style="position:fixed;" src="/images/manager/login_bg.jpg" height="100%" width="100%" />-->
+  <%= image_tag "manager/login_bg.jpg", :height => '100%',:width => '100%', :style =>'position:fixed' %>
+
+</div>
+<div class="main">
+  <%= yield %>
+</div>
+<div class="foot">版权所有©绣娘丝绸（中国）有限公司 </div>
+<%= javascript_include_tag 'manager/jquery.js','data-turbolinks-track' => false %>
+<script type="text/javascript">
+//  $(function(){
+//    $("#loginBtn").on("click",function(){
+//      window.location.href="main.html";
+//
+//    })
+//  });
+</script>
+</body>
+</html>

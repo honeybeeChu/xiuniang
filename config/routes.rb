@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'manager/login'
+
   mount WeixinRailsMiddleware::Engine, at: "/"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
@@ -10,6 +12,14 @@ Rails.application.routes.draw do
   get 'welcome/show'
   get 'welcome/index'
   get "welcome/navigate"
+
+  get 'manager/login'
+  get 'manager/loginCheck'
+
+  # 页面跳转到店员页面
+  get 'manager/dianyuan'
+  # 同步所有的店员信息到表中去
+  get 'manager/synchronizeDianyuan'
 
   get 'membership/index'  #会员信息的初始页面
   get 'membership/sendsms'

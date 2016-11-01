@@ -7,6 +7,7 @@ require 'rails/all'
 Bundler.require(*Rails.groups)
 
 module Xiuniang
+  REDIS_CACHE_NAMESPACE = 'cache:xiuniang'
   class Application < Rails::Application
         config.to_prepare do
       # Load application's model / class decorators
@@ -29,5 +30,7 @@ module Xiuniang
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
+
+    config.active_job.queue_adapter = :sidekiq
   end
 end
