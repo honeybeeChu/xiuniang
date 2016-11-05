@@ -12,20 +12,27 @@
   <%= stylesheet_link_tag 'manager/global.css', 'data-turbolinks-track' => true %>
   <%= stylesheet_link_tag 'manager/dpl.css', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'manager/jquery.js','data-turbolinks-track' => false %>
-
+  <%= javascript_include_tag 'dianyuan/echarts.min.js','data-turbolinks-track' => false %>
 </head>
+
 <body >
+<style>
+  .logo_style{vertical-align:bottom;}
+    #logo_text{ color:white;font-size:17px;}
+</style>
 <!--top-->
 <div class="wrap clearfix">
   <div class="header">
     <div class="w clearfix">
       <div class="left_top fl">
-        <!--<img src="images/pia-logo.png">-->
-        <%= image_tag "manager/pia-logo.png"%>
+        <%= image_tag "manager/pia-logo.png",size: "40x40",class:"logo_style" %>
+          <span id="logo_text">绣娘管理系统</span>
       </div>
       <div class="user fr">
         <div class="user-img">
-          <p><i class="iconfont icon-yonghu"></i><span>spark269</span><i class="iconfont icon-tuichu"></i><a href="" class="border-none">退出</a></p>
+          <p><i class="iconfont icon-yonghu"></i><span><%=session[:username] %></span><i class="iconfont icon-tuichu"></i>
+            <%=link_to "退出",manager_login_path,:class=>"border-none" %>
+          </p>
         </div>
       </div>
     </div>
@@ -49,17 +56,20 @@
         <li id="rolesq"><a href="javascript:;">角色授权</a></li>
       </ul>
     </div>
-    <div class="vtitle" id="dianyuan_manager"><a href="#"><i class="iconfont icon_menu icon-wangluo"></i>店员管理</a><em class=" iconfont icon_menu icon-unfold"></em></div>
+    <div class="vtitle" id="dianyuan_manager">
+      <a href="#"><i class="iconfont icon_menu icon-wangluo"></i>店员管理</a>
+      <em class=" iconfont icon_menu icon-unfold"></em>
+    </div>
     <div class="vcon" style="display: none;">
       <ul class="menu_body clearfix">
         <li id="ipbased">
-          <%= link_to '店员信息查询', manager_dianyuan_path, :id=>"dianyuan_01"%>
+          <%= link_to '店员信息查询', dianyuan_dianyuanInfo_path, :id=>"dianyuan_01"%>
         </li>
         <li id="ipgw">
-          <%= link_to '店员信息观察', manager_dianyuan_path, :id=>"dianyuan_01"%>
+          <%= link_to '店员信息观察', dianyuan_dianyuanCharts_path, :id=>"dianyuan_02"%>
         </li>
         <li id="ipgw">
-          <%= link_to '店员业务查询', manager_dianyuan_path, :id=>"dianyuan_01"%>
+          <%= link_to '店员业务查询', dianyuan_dianyuanInfo_path, :id=>"dianyuan_03"%>
         </li>
       </ul>
     </div>
@@ -111,7 +121,9 @@
 </div>
 
 
-
+<style>
+  .icon-unfold{top:-1px;}
+</style>
 
 <script>
   $(function(){

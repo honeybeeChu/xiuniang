@@ -17,9 +17,15 @@ Rails.application.routes.draw do
   get 'manager/loginCheck'
 
   # 页面跳转到店员页面
-  get 'manager/dianyuan'
+  get 'dianyuan/dianyuanInfo'
+  get 'dianyuan/dianyuanCharts'
+
+  get "dianyuan/downloadQrcode"
+
   # 同步所有的店员信息到表中去
-  get 'manager/synchronizeDianyuan'
+  get 'dianyuan/synchronizeDianyuan'
+
+
 
   get 'membership/index'  #会员信息的初始页面
   get 'membership/sendsms'

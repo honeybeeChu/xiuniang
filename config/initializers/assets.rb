@@ -12,6 +12,6 @@ Rails.application.config.assets.version = '1.0'
 Rails.application.config.assets.precompile += %w( welcome/*.css )
 Rails.application.config.assets.precompile += %w( manager/*.js )
 Rails.application.config.assets.precompile += %w( manager/*.css )
-
+Rails.application.config.assets.precompile += %w( dianyuan/*.js )
 
 

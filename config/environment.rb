@@ -22,7 +22,7 @@ SMS_URL='https://106.ihuyi.com/webservice/sms.php?method=Submit&account=cf_xiuni
 
 # 获取oauth code的微信ｕｒｌ
 WX_APPID='wx9faf547b0e25cf9e' # 丝酝丝绸
-WX_APPID='wxa4de3c29bddd316e' # 绣娘丝绸
+# WX_APPID='wxa4de3c29bddd316e' # 绣娘丝绸
 
 # 开发者ｓｅｃｒｅｔ
 WX_SECRET='438a11a1c61fff7b756fc708046a5546'   # 丝酝丝绸
@@ -31,7 +31,8 @@ WX_OAUTH_CODE_URL='https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx9
 # oauth_code的跳转链接
 WX_OAUTH_REDIRECT_RUL= 'https://api.weixin.qq.com/sns/oauth2/access_token?appid=wx9faf547b0e25cf9e&secret=438a11a1c61fff7b756fc708046a5546&code='   # 丝酝丝绸
 # membership_card_id
-WX_MEMBERSHIP_CARD_ID='pFS7Fjg8kV1IdDz01r4SQwMkuCKc' # 丝酝丝绸
+# WX_MEMBERSHIP_CARD_ID='pFS7Fjg8kV1IdDz01r4SQwMkuCKc'
+WX_MEMBERSHIP_CARD_ID="pKi16v24SAcdE4ColnJwcN_UTNxU"# 丝酝丝绸
 
 
 
@@ -46,7 +47,7 @@ DIANYUAN_INFO_URL='http://58.210.143.138:6081/xiuniang-server-0.0.1-SNAPSHOT/ser
 
 #　＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝微　信　相　关　的　接　口＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
 # 创建会员卡二维码接口，http请求方式: POST
-QRCODE_CREATE_URL='https://api.weixin.qq.com/card/qrcode/create?access_token=TOKEN'
+QRCODE_CREATE_URL='https://api.weixin.qq.com/card/qrcode/create'
 
 #更新会员信息(更新会员的积分)
 UPDATE_MEMBER_INFO_URL='https://api.weixin.qq.com/card/membercard/updateuser?access_token='

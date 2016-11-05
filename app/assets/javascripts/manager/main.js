@@ -12,9 +12,6 @@ $(document).ready(function(){
     $("#rolesq").click(function(){
         $("#J_ajax_container").load("views/rolesq.htm");
     });
-    //$("#ipbased").click(function(){
-    //    $("#J_ajax_container").load("views/manager/dianyuan.html.erb");
-    //});
     $("#ipgw").click(function(){
         $("#J_ajax_container").load("views/ipgw.htm");
     });

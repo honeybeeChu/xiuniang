@@ -28,11 +28,11 @@ class MembershipController < ApplicationController
 
     data = post(url)
     if data['errcode'].nil?
-      @client = WeixinAuthorize::Client.new(WX_APPID, WX_SECRET)
+      $client ||= WeixinAuthorize::Client.new(WX_APPID, WX_SECRET)
       @openid = data['openid']
       MEMBERSHIP_LOGGER.info "用户的openid是 #{@openid}"
 
-      result_json = @client.user(@openid).to_json
+      result_json = $client.user(@openid).to_json
       MEMBERSHIP_LOGGER.info result_json
 
       if result_json[:code] == 0
