@@ -9,6 +9,7 @@
   <meta name="keywords" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <%= stylesheet_link_tag 'manager/login.css', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'manager/jquery.js','data-turbolinks-track' => false %>
 </head>
 <body>
 <div class="bg_box"  style="position:relative; width:100%; height:100%; z-index:-1">
@@ -20,14 +21,6 @@
   <%= yield %>
 </div>
 <div class="foot">版权所有©绣娘丝绸（中国）有限公司 </div>
-<%= javascript_include_tag 'manager/jquery.js','data-turbolinks-track' => false %>
-<script type="text/javascript">
-//  $(function(){
-//    $("#loginBtn").on("click",function(){
-//      window.location.href="main.html";
-//
-//    })
-//  });
-</script>
+
 </body>
 </html>

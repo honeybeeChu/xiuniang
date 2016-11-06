@@ -210,6 +210,9 @@ WeixinRailsMiddleware::WeixinController.class_eval do
     # </xml>
     # 卡券领取事件推送
     def handle_user_get_card_event
+
+
+
       Rails.logger.info("回调事件处理")
     end
 
