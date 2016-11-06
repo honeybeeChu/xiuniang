@@ -5,7 +5,6 @@ class ManagerController < ApplicationController
     render 'login',layout:'login'
   end
 
-
   def loginCheck
     username = params[:username]
     password = params[:password]
@@ -16,9 +15,5 @@ class ManagerController < ApplicationController
       redirect_to dianyuan_dianyuanInfo_path
     end
   end
-
-
-
-
 
 end

@@ -44,7 +44,7 @@ class DianyuanController < ApplicationController
   # 同步店员数据信息
   def synchronizeDianyuan
     if(get(DIANYUAN_INFO_URL).nil?)
-      redirect_to manager_dianyuan_path
+      redirect_to dianyuan_dianyuanInfo_path
     else
       dianyuansObj = JSON.parse(get(DIANYUAN_INFO_URL).to_s)
       dianyuansObj.each do |dianyuan|
@@ -162,7 +162,7 @@ class DianyuanController < ApplicationController
 
         end
       end
-      redirect_to manager_dianyuan_path
+      redirect_to dianyuan_dianyuanInfo_path
     end
 
   end
@@ -170,7 +170,6 @@ class DianyuanController < ApplicationController
 
   # 下载浏览店员对应的二维码的链接
   def downloadQrcode
-
     # @@client = WeixinAuthorize::Client.new(WX_APPID, WX_SECRET)
     create_qrcode_json =  {
         "action_name": "QR_CARD",
