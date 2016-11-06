@@ -8,8 +8,8 @@ h2{  font-size: 20px; color: #990814; font-weight: normal; height: 57px; line-he
 .errors_box{height: 20px;}
 .errors{ padding-top: 15px; padding-left: 10px; line-height: 20px;  font-size: 12px; text-align: left; color: #e65455;}
 .row{ padding: 5px 0;}
-.required{ width: 330px; height: 28px;  padding: 5px 10px; line-height: 28px; font-style: 14px; color: #cecfd3; border-radius: 2px; border:none; border-bottom:2px solid #e8e8f0; background:url(../images/login_ico1.jpg) no-repeat right center;}
-.password{background:url(../images/login_ico2.jpg) no-repeat right center;}
+.required{ width: 330px; height: 28px;  padding: 5px 10px; line-height: 28px; font-style: 14px; color: #cecfd3; border-radius: 2px; border:none; border-bottom:2px solid #e8e8f0; background:image_url("manager/login_ico1.jpg") no-repeat right center;}
+.password{background:image_url("manager/login_ico2.jpg") no-repeat right center;}
 .yzm{ width: 100px; height: 28px;  padding: 5px 10px; line-height: 28px; font-style: 14px; color: #cecfd3; border-radius: 2px; border:none; border-bottom:2px solid #e8e8f0; }
 .yzm_img{ margin-top: 5px; cursor: pointer;}
 .check{ display: none;}

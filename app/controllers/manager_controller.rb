@@ -13,6 +13,8 @@ class ManagerController < ApplicationController
     if username == 'admin' && password='admin'
       session[:username]=username
       redirect_to dianyuan_dianyuanInfo_path
+    else
+      redirect_to manager_login_path
     end
   end
 

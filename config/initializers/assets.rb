@@ -14,4 +14,5 @@ Rails.application.config.assets.precompile += %w( manager/*.js )
 Rails.application.config.assets.precompile += %w( manager/*.css )
 Rails.application.config.assets.precompile += %w( dianyuan/*.js )
 
+Rails.application.config.assets.precompile += %w( fonts.css )
 
