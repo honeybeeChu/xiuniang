@@ -1,0 +1,2 @@
+module WxuserHelper
+end

@@ -14,6 +14,7 @@
   <%= stylesheet_link_tag 'fonts.css', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'manager/jquery.js','data-turbolinks-track' => false %>
   <%= javascript_include_tag 'dianyuan/echarts.min.js','data-turbolinks-track' => false %>
+  <%= javascript_include_tag 'manager/china.js','data-turbolinks-track' => false %>
 </head>
 
 <body >
@@ -43,20 +44,7 @@
 <!--sidebar-->
 <div class="sidebar" id="leftbar">
   <div class="menu" >
-    <div class="vtitle">
-      <a href="#">
-        <i class="iconfont icon_menu icon-shezhi"></i>
-        系统管理
-      </a>
-      <em class=" iconfont icon_menu icon-unfold"></em>
-    </div>
-    <div class="vcon" style="display: none;">
-      <ul class="menu_body clearfix">
-        <li  id="role" ><a href="javascript:;" >角色管理</a></li>
-        <li id="user"><a href="javascript:;">管理员管理</a></li>
-        <li id="rolesq"><a href="javascript:;">角色授权</a></li>
-      </ul>
-    </div>
+
     <div class="vtitle" id="dianyuan_manager">
       <a href="#"><i class="iconfont icon_menu icon-wangluo"></i>店员管理</a>
       <em class=" iconfont icon_menu icon-unfold"></em>
@@ -78,34 +66,37 @@
     <div class="vcon" style="display: none;">
       <ul class="menu_body clearfix">
         <li id="yxchart"><a href="#javascript:;">运行日志报表</a></li>
-        <li id="zdchart"><a href="#javascript:;">终端统计报表</a></li>
-        <li id="yychart"><a href="javascript:;">应用统计报表</a></li>
-        <li id="xychart"><a href="javascript:;">协议统计报表</a></li>
-        <li id="zdpm"><a href="javascript:;">终端每日排名</a></li>
-        <li id="yypm"><a href="javascript:;">URL每日排名</a></li>
+
       </ul>
     </div>
-    <div class="vtitle"><a href="#"><i class="iconfont icon_menu icon-guanli"></i>能力开放管理</a><em class=" iconfont icon_menu icon-unfold"></em></div>
+    <div class="vtitle" id="wxuser_manager">
+      <a href="#"><i class="iconfont icon_menu icon-fensi"></i>粉丝管理</a>
+      <em class=" iconfont icon_menu icon-unfold"></em>
+    </div>
     <div class="vcon" style="display: none;">
       <ul class="menu_body clearfix">
-        <li id="nlManage"><a href="javascript:;">能力管理</a></li>
-        <li id="yyManage"><a href="javascript:;">应用管理</a></li>
-        <li id="sqManage"><a href="javascript:;">授权管理</a></li>
-        <li id="hmdManage"><a href="javascript:;">黑名单控制</a></li>
-        <li id="jkManage"><a href="javascript:;">接口操作日志</a></li>
+        <%= link_to '粉丝地理分布',wxuser_distribution_path, :id=>"wxuser_01"%>
+        <%= link_to '粉丝信息列表',  wxuser_wxuserInfo_path, :id=>"wxuser_02"%>
+
       </ul>
     </div>
-    <div class="vtitle"><a href="#"><i class="iconfont icon_menu icon-jiankong"></i>系统监控</a><em class=" iconfont icon_menu icon-unfold"></em></div>
-    <div class="vcon" style="display: none;">
-      <ul class="menu_body clearfix">
-        <li id="systemMonitor"><a href="javascript:;">系统大屏监控</a></li>
-        <li id="hardwareMonitor"><a href="javascript:;">硬件资源监控</a></li>
-        <li id="serviceMonitor"><a href="javascript:;">软件服务监控</a></li>
-        <li id="systemAlarm"><a href="javascript:;">系统告警</a></li>
-        <li id="inspection"><a href="javascript:;">巡检</a></li>
-        <li id="dataMonitor"><a href="javascript:;">大数据集群监控</a></li>
-      </ul>
-    </div>
+
+
+    <!--<div class="vtitle">-->
+      <!--<a href="#">-->
+        <!--<i class="iconfont icon_menu icon-shezhi"></i>-->
+        <!--系统管理-->
+      <!--</a>-->
+      <!--<em class=" iconfont icon_menu icon-unfold"></em>-->
+    <!--</div>-->
+    <!--<div class="vcon" style="display: none;">-->
+      <!--<ul class="menu_body clearfix">-->
+        <!--<li  id="role" ><a href="javascript:;" >角色管理</a></li>-->
+        <!--<li id="user"><a href="javascript:;">管理员管理</a></li>-->
+        <!--<li id="rolesq"><a href="javascript:;">角色授权</a></li>-->
+      <!--</ul>-->
+    <!--</div>-->
+
 
 
 

@@ -1,0 +1,96 @@
+<div class="crumb_box"><span class="c333">粉丝管理</span><span class="pl10 pr10 ">·</span>
+  <a href="#" class="c999">粉丝地理分布</a></div>
+<div class="well mt5">
+  <div class=" fl" style=" width: 96%;">
+    <div id='chart1' class="chart " style="height: 550px;margin-top: 0px;" ></div>
+  </div>
+
+</div>
+</div>
+
+<script type="text/javascript">
+
+  $(function(){
+    $("#wxuser_01").parent().parent().show();
+    $('#wxuser_manager').addClass("active");
+    $("#wxuser_01").addClass("on");
+
+
+
+
+
+    //绘制员工男女比例
+    initDistribution();
+
+
+  });
+
+
+
+
+  //绘制员工男女比例
+  function initDistribution(){
+    var myChart = echarts.init(document.getElementById("chart1"));
+    var dataobj = <%=raw @datavalues.to_json%>;
+    console.log(dataobj);
+    var option = {
+      title : {
+        text: '公众号粉丝分布图',
+        subtext: '各省份粉丝数据',
+        x:'left'
+      },
+      tooltip: {
+        trigger: 'item'
+      },
+      legend: {
+        orient: 'vertical',
+        x:'right',
+        data:['粉丝数量']
+      },
+      dataRange: {
+        min: 0,
+        max: 10000,
+        color:['orange','yellow'],
+        text:['数量',''],           // 文本，默认为数值文本
+        calculable : true
+      },
+      series: [
+        {
+          top:5,
+          bottom:5,
+          name: '粉丝数量',
+          type: 'map',
+          mapType: 'china',
+          selectedMode : 'multiple',
+          itemStyle:{
+            normal:{label:{show:true}},
+            emphasis:{label:{show:true}}
+          },
+          lineStyle:{
+            normal:{
+              color:'black',
+              type:'dashed'
+            }
+
+          },
+          label: {
+            normal: {
+              show: true
+            },
+            emphasis: {
+              show: true
+            }
+          },
+          data:dataobj
+        }
+      ]
+    };
+    myChart.setOption(option);
+  }
+
+
+
+
+
+
+</script>

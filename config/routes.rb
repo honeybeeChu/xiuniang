@@ -25,12 +25,17 @@ Rails.application.routes.draw do
   # 同步所有的店员信息到表中去
   get 'dianyuan/synchronizeDianyuan'
 
+  # 粉丝和会员的分布页面
+  get 'wxuser/synchronizeWxuser'
+  get 'wxuser/distribution'
+  get 'wxuser/wxuserInfo'
 
 
-  get 'membership/index'  #会员信息的初始页面
-  get 'membership/sendsms'
-  get 'membership/opencardsubmit'
-  get 'membership/redirect'
+  get 'membership/info'
+  # get 'membership/index'  #会员信息的初始页面
+  # get 'membership/sendsms'
+  # get 'membership/opencardsubmit'
+  # get 'membership/redirect'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

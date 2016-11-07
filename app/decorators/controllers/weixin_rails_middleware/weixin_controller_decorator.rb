@@ -210,8 +210,18 @@ WeixinRailsMiddleware::WeixinController.class_eval do
     # </xml>
     # 卡券领取事件推送
     def handle_user_get_card_event
-
-
+      membership = Membership.new
+      membership.dianyuan_id=@weixin_message.OuterId
+      membership.member_card_card_id=@weixin_message.CardId
+      membership.openid=@weixin_message.FromUserName
+      wxuser = WxUser.find_by_openid(@weixin_message.FromUserName)
+      if !wxuser.nil?
+        wxuser.is_member=true
+        wxuser.save
+        membership.wx_user_id=wxuser.id
+      end
+      membership.is_valid=true
+      membership.save
 
       Rails.logger.info("回调事件处理")
     end
