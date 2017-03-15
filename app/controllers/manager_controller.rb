@@ -10,7 +10,7 @@ class ManagerController < ApplicationController
     password = params[:password]
 
     @login_name=username = params[:username]
-    if username == 'admin' && password='admin'
+    if username == 'admin' && password=='admin'
       session[:username]=username
       redirect_to dianyuan_dianyuanInfo_path
     else
