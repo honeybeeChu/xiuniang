@@ -16,19 +16,13 @@
     $("#wxuser_01").addClass("on");
 
 
-
-
-
-    //绘制员工男女比例
+    //绘制粉丝在各个省份的数量
     initDistribution();
-
 
   });
 
 
-
-
-  //绘制员工男女比例
+  //绘制粉丝在各个省份的数量
   function initDistribution(){
     var myChart = echarts.init(document.getElementById("chart1"));
     var dataobj = <%=raw @datavalues.to_json%>;
@@ -49,7 +43,7 @@
       },
       dataRange: {
         min: 0,
-        max: 10000,
+        max: 100,
         color:['orange','yellow'],
         text:['数量',''],           // 文本，默认为数值文本
         calculable : true

@@ -223,7 +223,7 @@ WeixinRailsMiddleware::WeixinController.class_eval do
       membership.is_valid=true
       membership.save
 
-      Rails.logger.info("回调事件处理")
+      Rails.logger.info("")
     end
 
     # <xml>

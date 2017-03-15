@@ -25,7 +25,7 @@
 
           <div class="span4" style="float: right;">
 
-            <%=link_to "同步粉丝数据" ,wxuser_synchronizeWxuser_path,:class=>"button  button-primary"%>
+            <%=link_to "同步粉丝数据" ,wxuser_synchronizeWxuser_path,remote: true,:class=>"button  button-primary synchronizeWxuser"%>
           </div>
     </div>
 
@@ -88,6 +88,22 @@
     $("#wxuser_02").parent().parent().show();
     $('#wxuser_manager').addClass("active");
     $("#wxuser_02").addClass("on");
+
+
+    $(".synchronizeWxuser").on('click', function () {
+      var resource_Link = $(this);
+      $.ajax({
+        url: resource_Link.attr("href"),
+        success: function (data) {
+          alert(data.err_msg)
+          $('<div class="results"  style="position:fixed;z-index:999;top:0px ">' + data.err_msg + '</div>').appendTo("body").fadeOut(2000);
+        },
+        error: function (msg) {
+          $('<div class="results"  style="position:fixed;z-index:999;top:0px ">获取失败</div>').appendTo("body").fadeOut(2000);
+        }
+      });
+      return false;
+    });
   });
 
 </script>

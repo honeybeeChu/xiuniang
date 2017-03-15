@@ -188,6 +188,7 @@ class DianyuanController < ApplicationController
     $client ||= WeixinAuthorize::Client.new(WX_APPID, WX_SECRET)
 
     result_json = $client.http_post(QRCODE_CREATE_URL,create_qrcode_json,{access_token:$client.get_access_token},WeixinAuthorize::CUSTOM_ENDPOINT)
+
     redirect_to result_json.result[:show_qrcode_url]
 
   end
