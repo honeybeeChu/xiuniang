@@ -1,4 +1,5 @@
 class WelcomeController < ApplicationController
+  skip_before_filter :authenticate
   def index
     @store = Store.find(params[:storeid])
     @lat = params[:lat]
