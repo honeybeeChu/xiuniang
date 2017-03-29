@@ -1,6 +1,13 @@
+<%= content_for :css do %>
+    <%= stylesheet_link_tag 'welcome/index', 'data-turbolinks-track' => true %>
+<% end %>
+
 <%= content_for :js do %>
     <%= javascript_include_tag 'http://api.map.baidu.com/api?v=2.0&ak=L6tV0zhkiNFQnuYIWdIC39wcuHMRR5ML&s=1','data-turbolinks-track' => false %>
 <% end %>
+
+<%= javascript_include_tag params[:controller] %>
+<%= stylesheet_link_tag params[:controller] %>
 
 <div class="u_body">
   <div id="sdetail_box">
