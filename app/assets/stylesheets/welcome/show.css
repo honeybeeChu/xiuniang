@@ -1,0 +1,103 @@
+html {height: 100%; min-height: 100%;}
+body {height: 100%; min-height: 100%;}
+img:not([src*="/"]){visibility: hidden;}
+body:after{
+  content:" ";
+  position:fixed;
+  z-index:1500;
+  left:-10000px;
+  top:50%;
+  margin: -45px auto auto -50px;
+  width:100px;
+  height:90px;
+  //background:url("../images/loading.gif") no-repeat center center, rgba(0,0,0,0.5);
+  border-radius:5px;
+  -webkit-box-shadow: 0 0 5px #fff;
+  -webkit-background-size: 160% auto;
+  background-size: 160% auto;
+}
+body.loading:after{display: inherit;left:50%;}
+body.loading:before{
+  content: "";
+  position: fixed;
+  z-index: 1000;
+  top:100px;
+  bottom:0;
+  left:0;
+  right:0;
+  display: block;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,0);
+}
+ul, ol { padding: 0; margin: 0;}
+li { list-style: none;}
+a:link { text-decoration: none;}
+
+.mtn { margin-top: 5px !important;}
+.mtm { margin-top: 10px !important;}
+.mtx { margin-top: 15px !important;}
+.u_null_text_c {padding:5px; text-align:center;}	
+
+
+.u_app_version p,
+.u_mall_ilist li a,
+.u_menu_category li.arrow,
+.u_goods_list li,
+.u_gdetail_info li a,
+.u_store_list li,
+.u_header .city,
+.u_matchind_category>ul>li,
+.u_matchind_category li.a span,
+.u_more_list ul li,
+.u_video_list ul li a,
+.u_handbook_list ul li a,
+.u_feedback ul li a,
+.u_stock_result ul li,
+.u_record_list ul li a
+{
+  //background: url(../images/list_bg.png) no-repeat;
+  background-size: 25px auto;
+}
+.u_matching_img li span, .u_matching_dimg span, .u_matching_dlist li a {
+  //background: url(../images/matching_icon.png) no-repeat;
+  background-size: 25px auto;
+}
+
+.u_hidden { display: none;}
+
+.u_body {
+  margin: 0 auto;
+  max-width: 1024px;
+  min-height: 100%;
+  background-color: #eeeeee;
+}
+.u_header {
+  position: relative;
+  width: 100%;
+  height: 40px;
+  background-color: #fa0000;
+  text-align: center;
+  line-height: 40px;
+  color: #fff;
+  font-size: 18px;
+}
+.u_header .icon {
+  position: absolute;
+  top: 0;
+  display: block;
+  width: 40px;
+  height: 40px;
+  //background-image: image_url("back.png");
+  background-size: 40px auto;
+}
+.u_header .l { left: 0;}
+.u_header .r { right: 0;}
+//.u_header .icon1 { background:url(../images/menuicon.png) no-repeat center center; background-size:25px auto;}
+//.u_header .icon2 { background-position: center -40px;}
+.u_header .icon3 { background:image_url("back.png") ; background-position: 5px -40px; background-size: 40px auto;}
+//.u_header .icon4 { background:url(../images/closeicon.png) no-repeat center center; background-size:20px auto;}
+.u_header .font {
+  background-image: none;
+  color: #fff;
+}
