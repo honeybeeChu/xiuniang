@@ -9,8 +9,15 @@
 
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
 
-  <%= yield :css %>
-  <%= yield :js %>
+  <%= javascript_include_tag params[:controller] %>
+  <%= stylesheet_link_tag params[:controller] %>
+
+
+  <%= content_for :js do %>
+      <%= javascript_include_tag 'http://api.map.baidu.com/api?v=2.0&ak=L6tV0zhkiNFQnuYIWdIC39wcuHMRR5ML&s=1','data-turbolinks-track' => false %>
+  <% end %>
+
+
   <%= csrf_meta_tags %>
 </head>
 <body>
