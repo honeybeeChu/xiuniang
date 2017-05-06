@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161107131354) do
+ActiveRecord::Schema.define(version: 20170417091525) do
 
   create_table "dianyuans", force: :cascade do |t|
     t.string   "DYDM",        limit: 255, null: false
@@ -52,24 +52,31 @@ ActiveRecord::Schema.define(version: 20161107131354) do
     t.datetime "updated_at"
   end
 
-  create_table "member_cards", primary_key: "card_id", force: :cascade do |t|
-    t.string   "brand_name",  limit: 255
-    t.string   "title",       limit: 255
-    t.string   "sub_title",   limit: 255
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
-    t.string   "description", limit: 255
+  create_table "memberships", force: :cascade do |t|
+    t.string  "openid",            limit: 255
+    t.integer "dianyuan_id",       limit: 4
+    t.string  "card_id",           limit: 255
+    t.string  "code",              limit: 255
+    t.string  "name",              limit: 255
+    t.integer "sex",               limit: 4
+    t.string  "phone",             limit: 255
+    t.string  "birthday",          limit: 255
+    t.string  "idcard",            limit: 255
+    t.string  "email",             limit: 255
+    t.string  "location",          limit: 255
+    t.integer "postcode",          limit: 4
+    t.string  "education_backgro", limit: 255
+    t.string  "industry",          limit: 255
+    t.string  "income",            limit: 255
+    t.string  "habit",             limit: 255
+    t.integer "bonus",             limit: 4
+    t.integer "balance",           limit: 4
+    t.integer "level",             limit: 4
+    t.string  "user_card_status",  limit: 255
+    t.boolean "has_active"
   end
 
-  create_table "memberships", force: :cascade do |t|
-    t.integer  "dianyuan_id",         limit: 4
-    t.string   "member_card_card_id", limit: 255
-    t.integer  "wx_user_id",          limit: 4
-    t.string   "openid",              limit: 255
-    t.boolean  "is_valid"
-    t.datetime "created_at",                      null: false
-    t.datetime "updated_at",                      null: false
-  end
+  add_index "memberships", ["openid"], name: "index_memberships_on_openid", using: :btree
 
   create_table "stores", force: :cascade do |t|
     t.string   "sid",           limit: 255
@@ -114,5 +121,6 @@ ActiveRecord::Schema.define(version: 20161107131354) do
   end
 
   add_index "wx_users", ["nickname"], name: "index_wx_users_on_nickname", using: :btree
+  add_index "wx_users", ["openid"], name: "index_wx_users_on_openid", using: :btree
 
 end
