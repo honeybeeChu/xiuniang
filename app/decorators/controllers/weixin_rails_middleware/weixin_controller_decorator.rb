@@ -211,7 +211,7 @@ WeixinRailsMiddleware::WeixinController.class_eval do
     # 卡券领取事件推送
     def handle_user_get_card_event
 
-      WX_LOGGER.info "#{@weixin_message.FromUserName} 领取了会员卡,卡号是#{@weixin_message.UserCardCode}，等待激活"
+      WX_LOGGER.info "#{@weixin_message.FromUserName} 领取了会员卡,卡号是#{@weixin_message.UserCardCode}，属于店员#{@weixin_message.OuterId}发送等待激活"
 
       begin
         membership = Membership.new
@@ -230,12 +230,7 @@ WeixinRailsMiddleware::WeixinController.class_eval do
         WX_LOGGER.error e.to_s
 
       end
-
-
-
     end
-
-
 
     # </xml>
     # <ToUserName> <![CDATA[gh_3fcea188bf78]]></ToUserName>
@@ -250,7 +245,6 @@ WeixinRailsMiddleware::WeixinController.class_eval do
   def handle_submit_membercard_user_info_event
 
     WX_LOGGER.info "卡券激活事件start.."
-
     # https://api.weixin.qq.com/card/membercard/userinfo/get?access_token
     # 激活以后，调用接口获取用户激活时填写的个人信息，并保持
 
@@ -293,8 +287,6 @@ WeixinRailsMiddleware::WeixinController.class_eval do
     rescue Exception => e
       WX_LOGGER.error e.to_s
     end
-
-
 
     params = {"card_id":@weixin_message.CardId,"code":@weixin_message.UserCardCode}
     membershipinfo = $client.http_post("https://api.weixin.qq.com/card/membercard/userinfo/get",
