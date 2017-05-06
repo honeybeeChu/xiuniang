@@ -253,13 +253,8 @@ WeixinRailsMiddleware::WeixinController.class_eval do
 
       # 修改会员信息数据
       if membershipinfo.en_msg == "ok"
-
-
         membership = Membership.find_by_code @weixin_message.UserCardCode
         result  = membershipinfo.result
-        membership.sex = result[:sex]=="MALE" ? 0 : 1
-
-
         userinfoArray =   result[:user_info][:common_field_list]
         userinfoArray.each  do |userinfo|
           if "USER_FORM_INFO_FLAG_MOBILE" == userinfo[:name]
@@ -268,7 +263,8 @@ WeixinRailsMiddleware::WeixinController.class_eval do
             membership.birthday = userinfo[:value]
           elsif "USER_FORM_INFO_FLAG_NAME" == userinfo[:name]
             membership.name = userinfo[:value]
-
+          elsif "USER_FORM_INFO_FLAG_SEX" == userinfo[:name]
+              "MALE" == userinfo[:value] ? membership.sex = 0 : membership.sex = 1
           elsif "USER_FORM_INFO_FLAG_INDUSTRY" == userinfo[:name]
             if userinfo[:value] != "undefined"
               membership.industry = userinfo[:value]
