@@ -211,20 +211,27 @@ WeixinRailsMiddleware::WeixinController.class_eval do
     # 卡券领取事件推送
     def handle_user_get_card_event
 
-      WX_LOGGER.info "#{@weixin_message.FromUserName} 领取了会员卡，等待激活"
+      WX_LOGGER.info "#{@weixin_message.FromUserName} 领取了会员卡,卡号是#{@weixin_message.UserCardCode}，等待激活"
 
-      membership = Membership.new
-      membership.dianyuan_id = @weixin_message.OuterId
-      membership.card_id = @weixin_message.CardId
-      membership.membership_number = @weixin_message.UserCardCode
-      membership.openid = @weixin_message.FromUserName
-      wxuser = WxUser.find_by_openid(@weixin_message.FromUserName)
-      if !wxuser.nil?
-        wxuser.is_member=true
-        wxuser.save
+      begin
+        membership = Membership.new
+        membership.dianyuan_id = @weixin_message.OuterId
+        membership.card_id = @weixin_message.CardId
+        membership.code = @weixin_message.UserCardCode
+        membership.openid = @weixin_message.FromUserName
+        wxuser = WxUser.find_by_openid(@weixin_message.FromUserName)
+        if !wxuser.nil?
+          wxuser.is_member=true
+          wxuser.save
+        end
+        membership.has_active=false
+        membership.save
+      rescue Exception => e
+        WX_LOGGER.error e.to_s
+
       end
-      membership.has_active=false
-      membership.save
+
+
 
     end
 
