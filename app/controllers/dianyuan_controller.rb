@@ -15,9 +15,7 @@ class DianyuanController < ApplicationController
       @current_dymc = params[:DYMC]
       render "dianyuanInfo"
     end
-
   end
-
 
   def dianyuanCharts
     # 分组店员的店铺信息
@@ -45,8 +43,11 @@ class DianyuanController < ApplicationController
   def synchronizeDianyuan
     if(get(DIANYUAN_INFO_URL).nil?)
       redirect_to dianyuan_dianyuanInfo_path
+      # render :json => {:err_msg => '获取成功'}
     else
       dianyuansObj = JSON.parse(get(DIANYUAN_INFO_URL).to_s)
+
+      Dianyuan.destroy_all
       dianyuansObj.each do |dianyuan|
         if Dianyuan.find_by_DYDM(dianyuan["DYDM"]).nil?
           new_dianyuan = Dianyuan.new
@@ -179,7 +180,7 @@ class DianyuanController < ApplicationController
                 "card_id": WX_MEMBERSHIP_CARD_ID,
                 "code": "",
                 "openid": "",
-                "is_unique_code": false ,
+                "is_unique_code": true,
                 "outer_str":params[:dydm]
             }
         }

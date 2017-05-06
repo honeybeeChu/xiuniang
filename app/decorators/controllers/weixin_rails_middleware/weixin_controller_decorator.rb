@@ -26,8 +26,6 @@ WeixinRailsMiddleware::WeixinController.class_eval do
       @label = @weixin_message.Label
 
 
-
-
       # 将用户发来的经纬度信息，转换成百度的经纬度
       baiduresult = JSON.parse(http_get_baidu @lx,@ly)
 
@@ -46,14 +44,16 @@ WeixinRailsMiddleware::WeixinController.class_eval do
         articles.push(article)
       end
 
-      @client = WeixinAuthorize::Client.new("wxa4de3c29bddd316e", "6d5dd9526242c753746ae3a8b54affe6")
+      # @client = WeixinAuthorize::Client.new("wxa4de3c29bddd316e", "6d5dd9526242c753746ae3a8b54affe6")
+      $client ||= WeixinAuthorize::Client.new(WX_APPID, WX_SECRET)
+
 
       params = {
           "touser":@weixin_message.FromUserName,
           "msgtype":"news",
           "news":{"articles": articles}}
 
-      @client.http_post("https://api.weixin.qq.com/cgi-bin/message/custom/send",
+      $client.http_post("https://api.weixin.qq.com/cgi-bin/message/custom/send",
                         params,{}, WeixinAuthorize::CUSTOM_ENDPOINT)
 
     end
@@ -211,20 +211,99 @@ WeixinRailsMiddleware::WeixinController.class_eval do
     # 卡券领取事件推送
     def handle_user_get_card_event
       membership = Membership.new
-      membership.dianyuan_id=@weixin_message.OuterId
-      membership.member_card_card_id=@weixin_message.CardId
-      membership.openid=@weixin_message.FromUserName
+      membership.dianyuan_id = @weixin_message.OuterId
+      membership.card_id = @weixin_message.CardId
+      membership.membership_number = @weixin_message.UserCardCode
+      membership.openid = @weixin_message.FromUserName
       wxuser = WxUser.find_by_openid(@weixin_message.FromUserName)
       if !wxuser.nil?
         wxuser.is_member=true
         wxuser.save
-        membership.wx_user_id=wxuser.id
       end
-      membership.is_valid=true
+      membership.has_active=false
       membership.save
 
       Rails.logger.info("")
     end
+
+
+
+    # </xml>
+    # <ToUserName> <![CDATA[gh_3fcea188bf78]]></ToUserName>
+    # <FromUserName><![CDATA[obLatjlaNQKb8FqOvt1M1x1lIBFE]]></FromUserName>
+    # <CreateTime>1432668700</CreateTime>
+    # <MsgType><![CDATA[event]]></MsgType>
+    # <Event><![CDATA[submit_membercard_user_info]]></Event>
+    # <CardId><![CDATA[pbLatjtZ7v1BG_ZnTjbW85GYc_E8]]></CardId>
+    # <UserCardCode><![CDATA[018255396048]]></UserCardCode>
+    # </xml>
+    # 卡券激活事件
+  def handle_submit_membercard_user_info_event
+
+    WX_LOGGER.info "卡券激活事件start.."
+
+    # https://api.weixin.qq.com/card/membercard/userinfo/get?access_token
+    # 激活以后，调用接口获取用户激活时填写的个人信息，并保持
+
+    begin
+      params = {"card_id":@weixin_message.CardId,"code":@weixin_message.UserCardCode}
+      $client ||= WeixinAuthorize::Client.new(WX_APPID, WX_SECRET)
+      membershipinfo = $client.http_post("https://api.weixin.qq.com/card/membercard/userinfo/get",
+                                         params,{}, WeixinAuthorize::CUSTOM_ENDPOINT)
+
+      # 修改会员信息数据
+      if membershipinfo.en_msg == "ok"
+
+
+        membership = Membership.find_by_code @weixin_message.UserCardCode
+        result  = membershipinfo.result
+        membership.sex = result[:sex]=="MALE" ? 0 : 1
+
+
+        userinfoArray =   result[:user_info][:common_field_list]
+        userinfoArray.each  do |userinfo|
+          if "USER_FORM_INFO_FLAG_MOBILE" == userinfo[:name]
+            membership.phone = userinfo[:value]
+          elsif "USER_FORM_INFO_FLAG_BIRTHDAY" == userinfo[:name]
+            membership.birthday = userinfo[:value]
+          elsif "USER_FORM_INFO_FLAG_NAME" == userinfo[:name]
+            membership.name = userinfo[:value]
+
+          elsif "USER_FORM_INFO_FLAG_INDUSTRY" == userinfo[:name]
+            if userinfo[:value] != "undefined"
+              membership.industry = userinfo[:value]
+            end
+          elsif "USER_FORM_INFO_FLAG_LOCATION" == userinfo[:name]
+            if userinfo[:value] != "undefined"
+              membership.location = userinfo[:value]
+            end
+          elsif "USER_FORM_INFO_FLAG_POST_CODE" == userinfo[:name]
+            if userinfo[:value] != "undefined"
+              membership.postcode = userinfo[:value]
+            end
+          end
+        end
+        membership.save
+      end
+    rescue Exception => e
+      WX_LOGGER.error e.to_s
+    end
+
+
+
+    params = {"card_id":@weixin_message.CardId,"code":@weixin_message.UserCardCode}
+    membershipinfo = $client.http_post("https://api.weixin.qq.com/card/membercard/userinfo/get",
+                      params,{}, WeixinAuthorize::CUSTOM_ENDPOINT)
+
+    # 修改会员信息数据
+    if membershipinfo[:errmsg] == "ok"
+      membership = Membership.find_by_membership_number @weixin_message.UserCardCode
+      membership.sex = membershipinfo[:sex]
+      membership
+    end
+
+  end
+
 
     # <xml>
     # <ToUserName><![CDATA[toUser]]></ToUserName>

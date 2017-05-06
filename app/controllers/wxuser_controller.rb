@@ -37,17 +37,14 @@ class WxuserController < ApplicationController
   def synchronizeWxuser
     # redirect_to wxuser_wxuserInfo_path
     Thread.new{saveWxUsers()}
+
     render :json => {:err_msg => '获取成功'}
-
-    puts "====================================="
-
-
 
   end
 
   private
   def emoji_filter(str)
-    pattern = /[\u{1F300}-\u{1F64F}\u{1F680}-\u{1F6FF}\u{1F1E6}-\u{1F1FF}\u231A\u231B\u23E9-\u23EC\u23F0\u23F3\u2614\u2615\u2648-\u2653\u267F\u2693\u26A1\u26AA\u26AB\u26B3-\u26BD\u26BF-\u26E1\u26E3-\u26FF\u2705\u270A\u270B\u2728\u274C\u274E\u2753\u2757\u2795\u2796\u2797\u27B0\u27BF\u{1F1E6}-\u{1F1FF},'🦄',' ']/x
+    pattern = /[\u{1F300}-\u{1F64F}\u{1F680}-\u{1F6FF}\u{1F1E6}-\u{1F1FF}-\u{1F195}-\u{1F981}\u231A\u231B\u23E9-\u23EC\u23F0\u23F3\u2614\u2615\u2648-\u2653\u267F\u2693\u26A1\u26AA\u26AB\u26B3-\u26BD\u26BF-\u26E1\u26E3-\u26FF\u2705\u270A\u270B\u2728\u274C\u274E\u2753\u2757\u2795\u2796\u2797\u27B0\u27BF\u{1F1E6}-\u{1F1FF},'🦁','🦄',' ']/x
     str.gsub(pattern, '')
   end
 
@@ -70,11 +67,10 @@ class WxuserController < ApplicationController
       # puts wxuserArray
       # WxUser.create(wxuserArray)
 
-
-      wxusers =  $client.followers # 获取所有的粉丝信息
+      wxusers =  $client.followers WxUser.last.openid# 获取所有的粉丝信息
       wxuserArray = Array.new
       if wxusers.en_msg == "ok"
-        WxUser.destroy_all
+        # WxUser.destroy_all
 
         result = wxusers.result
         openidArray = result[:data][:openid]
@@ -102,14 +98,14 @@ class WxuserController < ApplicationController
 
               wxuserArray.push new_wxuser.to_hash
 
-              # new_wxuser.save
+              new_wxuser.save
             # end
           end
         end
 
-        WxUser.create(wxuserArray)
+        # WxUser.create(wxuserArray).save!
 
-
+        # oGIF7tzQCLiJce7SeAKc7IDGzqE8 oGIF7tzDb5iUibLUCRKroVjkWLbw
       end
     rescue Exception => e
       puts e.message
