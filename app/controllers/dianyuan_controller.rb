@@ -181,7 +181,8 @@ class DianyuanController < ApplicationController
                 "code": "",
                 "openid": "",
                 "is_unique_code": true,
-                "outer_str":params[:dydm]
+                "outer_str":params[:dydm],
+                "outer_id":params[:dydm]
             }
         }
     }
