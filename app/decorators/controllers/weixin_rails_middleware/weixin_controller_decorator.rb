@@ -210,6 +210,9 @@ WeixinRailsMiddleware::WeixinController.class_eval do
     # </xml>
     # 卡券领取事件推送
     def handle_user_get_card_event
+
+      WX_LOGGER.info "#{@weixin_message.FromUserName} 领取了会员卡，等待激活"
+
       membership = Membership.new
       membership.dianyuan_id = @weixin_message.OuterId
       membership.card_id = @weixin_message.CardId
@@ -223,7 +226,6 @@ WeixinRailsMiddleware::WeixinController.class_eval do
       membership.has_active=false
       membership.save
 
-      Rails.logger.info("")
     end
 
 
