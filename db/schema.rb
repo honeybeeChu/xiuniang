@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170417091525) do
+ActiveRecord::Schema.define(version: 20170526054847) do
 
   create_table "dianyuans", force: :cascade do |t|
     t.string   "DYDM",        limit: 255, null: false
@@ -52,31 +52,88 @@ ActiveRecord::Schema.define(version: 20170417091525) do
     t.datetime "updated_at"
   end
 
+  create_table "efast_orders", force: :cascade do |t|
+    t.string   "sell_record_code",  limit: 255
+    t.string   "order_status",      limit: 255
+    t.integer  "shipping_status",   limit: 4
+    t.string   "pay_status",        limit: 255
+    t.string   "sale_channel_code", limit: 255
+    t.string   "shop_code",         limit: 255
+    t.string   "buyer_name",        limit: 255
+    t.string   "receiver_name",     limit: 255
+    t.string   "receiver_country",  limit: 255
+    t.string   "receiver_province", limit: 255
+    t.string   "receiver_city",     limit: 255
+    t.string   "receiver_district", limit: 255
+    t.string   "receiver_street",   limit: 255
+    t.string   "receiver_address",  limit: 255
+    t.string   "receiver_addr",     limit: 255
+    t.string   "receiver_zip_code", limit: 255
+    t.string   "receiver_mobile",   limit: 255
+    t.string   "receiver_phone",    limit: 255
+    t.string   "receiver_email",    limit: 255
+    t.integer  "payable_money",     limit: 4
+    t.integer  "order_money",       limit: 4
+    t.integer  "discount_fee",      limit: 4
+    t.string   "pay_code",          limit: 255
+    t.datetime "pay_time"
+    t.string   "openid",            limit: 255
+  end
+
+  add_index "efast_orders", ["openid"], name: "index_efast_orders_on_openid", using: :btree
+  add_index "efast_orders", ["receiver_mobile"], name: "index_efast_orders_on_receiver_mobile", using: :btree
+
   create_table "memberships", force: :cascade do |t|
-    t.string  "openid",            limit: 255
-    t.integer "dianyuan_id",       limit: 4
-    t.string  "card_id",           limit: 255
-    t.string  "code",              limit: 255
-    t.string  "name",              limit: 255
-    t.integer "sex",               limit: 4
-    t.string  "phone",             limit: 255
-    t.string  "birthday",          limit: 255
-    t.string  "idcard",            limit: 255
-    t.string  "email",             limit: 255
-    t.string  "location",          limit: 255
-    t.integer "postcode",          limit: 4
-    t.string  "education_backgro", limit: 255
-    t.string  "industry",          limit: 255
-    t.string  "income",            limit: 255
-    t.string  "habit",             limit: 255
-    t.integer "bonus",             limit: 4
-    t.integer "balance",           limit: 4
-    t.integer "level",             limit: 4
-    t.string  "user_card_status",  limit: 255
-    t.boolean "has_active"
+    t.string   "openid",             limit: 255
+    t.integer  "dianyuan_id",        limit: 4
+    t.string   "card_id",            limit: 255
+    t.string   "code",               limit: 255
+    t.string   "name",               limit: 255
+    t.integer  "sex",                limit: 4
+    t.string   "phone",              limit: 255
+    t.string   "birthday",           limit: 255
+    t.string   "idcard",             limit: 255
+    t.string   "email",              limit: 255
+    t.string   "location",           limit: 255
+    t.integer  "postcode",           limit: 4
+    t.string   "education_backgro",  limit: 255
+    t.string   "industry",           limit: 255
+    t.string   "income",             limit: 255
+    t.string   "habit",              limit: 255
+    t.integer  "bonus",              limit: 4
+    t.integer  "balance",            limit: 4
+    t.integer  "level",              limit: 4
+    t.string   "user_card_status",   limit: 255
+    t.boolean  "has_active"
+    t.integer  "total_consumption",  limit: 4
+    t.integer  "recent_consumption", limit: 4
+    t.datetime "update_points_date"
   end
 
   add_index "memberships", ["openid"], name: "index_memberships_on_openid", using: :btree
+
+  create_table "points_records", force: :cascade do |t|
+    t.integer  "fans_id",      limit: 4
+    t.string   "openid",       limit: 255
+    t.string   "kdt_name",     limit: 255
+    t.string   "mobile",       limit: 255
+    t.integer  "amount",       limit: 4
+    t.integer  "total",        limit: 4
+    t.string   "description",  limit: 255
+    t.datetime "created_time"
+    t.string   "client_hash",  limit: 255
+  end
+
+  add_index "points_records", ["mobile"], name: "index_points_records_on_mobile", using: :btree
+  add_index "points_records", ["openid"], name: "index_points_records_on_openid", using: :btree
+
+  create_table "points_rules", force: :cascade do |t|
+    t.integer  "level",       limit: 4
+    t.integer  "consumption", limit: 4
+    t.float    "rate",        limit: 24
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
 
   create_table "stores", force: :cascade do |t|
     t.string   "sid",           limit: 255
