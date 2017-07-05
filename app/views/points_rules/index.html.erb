@@ -29,10 +29,10 @@
                 margin-right: 50px;
                 display: inline-block;">
               <option value=1 <%= pointsrule.condition == 0 ? 'selected' : "" %> >按笔数</option>
-              <option value=2 <%= pointsrule.condition == 1 ? 'selected' : "" %>>按消费额</option>
+              <option value=2 <%= pointsrule.condition == 1 ? 'selected' : "" %>>按总消费额</option>
               <option value=3 <%= pointsrule.condition == 2 || pointsrule.condition == 3 ? 'selected' : "" %>>组合条件</option>
+              <option value=4 <%= pointsrule.condition == 4 ? 'selected' : "" %>>按单笔消费额</option>
             </select>
-
 
             <div class="by_trade_num" style="display:<%= pointsrule.condition == 0 ? 'block' : 'none' %>;">
               成交满
@@ -45,7 +45,7 @@
 
 
             <div class="by_consumption" style="display:<%= pointsrule.condition == 1 ? 'block' : 'none' %>;">
-              消费满
+              总消费满
               <input type="number" value="<%= pointsrule.consumption %>">元
             </div>
 
@@ -59,10 +59,20 @@
                 <option value=2 <%= pointsrule.condition == 2 ? 'selected' : "" %>>或者</option>
                 <option value=3 <%= pointsrule.condition == 3 ? 'selected' : "" %>>并且</option>
               </select>
-              &nbsp;&nbsp;消费满
+              &nbsp;&nbsp;总消费满
               <input type="number" class="consumption_item" value="<%= pointsrule.consumption %>">
               元
             </div>
+
+
+
+            <div class="by_one_condition" style="display:<%= pointsrule.condition ==  4 ? 'block' : 'none' %>;">
+              单笔消费满
+              <input type="number" class="one_consumption_item" value="<%= pointsrule.consumption %>">
+              元
+            </div>
+
+
 
 
 
@@ -90,17 +100,27 @@
       $(this).parent().find(".by_trade_num").show();
       $(this).parent().find(".by_consumption").hide();
       $(this).parent().find(".by_all_condition").hide();
+      $(this).parent().find(".by_one_condition").hide();
     }
     else if(2 == $(this).val()){
       $(this).parent().find(".by_trade_num").hide();
       $(this).parent().find(".by_consumption").show();
       $(this).parent().find(".by_all_condition").hide();
+      $(this).parent().find(".by_one_condition").hide();
     }
     else if(3 == $(this).val()){
       $(this).parent().find(".by_trade_num").hide();
       $(this).parent().find(".by_consumption").hide();
       $(this).parent().find(".by_all_condition").show();
+      $(this).parent().find(".by_one_condition").hide();
     }
+    else if(4 == $(this).val()){
+      $(this).parent().find(".by_trade_num").hide();
+      $(this).parent().find(".by_consumption").hide();
+      $(this).parent().find(".by_all_condition").hide();
+      $(this).parent().find(".by_one_condition").show();
+    }
+
   });
 
   $(".update_confirm_btn").click(function(){
@@ -111,6 +131,7 @@
     var select_condition = $("tr[data-id=" + rule_id +"]").find(".select_condition").val();
 
     var rate = $("tr[data-id=" + rule_id +"]").find(".point_rule_rate").val();
+
 
     if($.trim(name) == "" ){
       alert("名称不能为空");
@@ -127,7 +148,8 @@
     autoObject.id = rule_id;
     autoObject.name = name;
     autoObject.level = $(this).attr("data-level");
-    autoObject.rate = rate
+    autoObject.rate = rate;
+
 
     //只考虑交易笔数
     if(1 == select_condition){
@@ -136,6 +158,7 @@
       autoObject.consumption =0;
       if($.trim(autoObject.trade_num) == ""){
         alert("交易笔数不能为空");
+        return;
       }
     }
     //只考虑交易金额
@@ -145,32 +168,44 @@
       autoObject.condition=1;
       if($.trim(autoObject.consumption) == ""){
         alert("交易金额不能为空");
+        return;
       }
     }
     //组合条件
     else if(3 == select_condition){
       var _condition = $("tr[data-id=" + rule_id +"]").find(".by_all_condition select").val();
       autoObject.condition=_condition;
-      autoObject.consumption = $("tr[data-id=" + rule_id +"]").find(".by_all_condition .trand_num_item").val();
-      autoObject.trade_num = $("tr[data-id=" + rule_id +"]").find(".by_all_condition .consumption_item").val();
+      autoObject.consumption = $("tr[data-id=" + rule_id +"]").find(".by_all_condition .consumption_item").val();
+      autoObject.trade_num = $("tr[data-id=" + rule_id +"]").find(".by_all_condition .trand_num_item").val();
 
       if($.trim(autoObject.consumption) == "" || $.trim(autoObject.trade_num) == ""){
         alert("交易金额和笔数不能为空");
         return;
       }
     }
+    else if(4 == select_condition){
+      autoObject.consumption = $("tr[data-id=" + rule_id +"]").find(".by_one_condition input").val();
+      autoObject.trade_num =0;
+      autoObject.condition=4;
 
-    var actionUrl = '<%= points_rules_modify_path %>';
-    $.ajax({
-      type: 'post',
-      url: actionUrl,
-      dataType: 'json',
-      timeout:6000,
-      data: autoObject,
-      complete:function(data){
-       window.location.reload();
+      if($.trim(autoObject.consumption) == ""){
+        alert("单笔金额不能为空");
+        return;
       }
-    });
+    }
+
+      var actionUrl = '<%= points_rules_modify_path %>';
+      $.ajax({
+        type: 'post',
+        url: actionUrl,
+        dataType: 'json',
+        timeout:6000,
+        data: autoObject,
+        complete:function(data){
+          window.location.reload();
+        }
+      });
+
   });
 
 
