@@ -1,0 +1,40 @@
+<div class="crumb_box"><span class="c333">系统设置</span><span class="pl10 pr10 ">·</span>
+  <a href="#" class="c999">积分设置</a></div>
+<div class="well mt5">
+  <%= form_for(@pointsrule) do |f| %>
+
+      <% if @pointsrule.errors.any? %>
+          <div id="error_explanation">
+            <h2>
+              <%= pluralize(@pointsrule.errors.count, "error") %> prohibited
+              this article from being saved:
+            </h2>
+            <ul>
+              <% @pointsrule.errors.full_messages.each do |msg| %>
+                  <li><%= msg %></li>
+              <% end %>
+            </ul>
+          </div>
+      <% end %>
+
+
+      <%= f.label :等级 %>
+      <%= f.text_field :level %>
+
+      <%= f.label :消费额度 %>
+      <%= f.text_field :consumption %>
+
+      <%= f.label :积分兑换比例 %>
+      <%= f.text_field :rate %>
+
+      <p>
+        <%= f.submit '保存' %>
+      </p>
+
+      <%= link_to '退回', points_rules_path%>
+
+
+  <% end %>
+
+  <%= button_to '退回11', points_rules_path%>
+</div>

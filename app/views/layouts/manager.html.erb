@@ -69,6 +69,7 @@
 
       </ul>
     </div>
+
     <div class="vtitle" id="wxuser_manager">
       <a href="#"><i class="iconfont icon_menu icon-fensi"></i>粉丝管理</a>
       <em class=" iconfont icon_menu icon-unfold"></em>
@@ -77,6 +78,18 @@
       <ul class="menu_body clearfix">
         <%= link_to '粉丝地理分布',wxuser_distribution_path, :id=>"wxuser_01"%>
         <%= link_to '粉丝信息列表',  wxuser_wxuserInfo_path, :id=>"wxuser_02"%>
+
+      </ul>
+    </div>
+
+
+    <div class="vtitle" id="system_set">
+      <a href="#"><i class="iconfont icon_menu icon-fensi"></i>系统设置</a>
+      <em class=" iconfont icon_menu icon-unfold"></em>
+    </div>
+    <div class="vcon" style="display: none;">
+      <ul class="menu_body clearfix">
+        <%= link_to '积分设置',points_rules_path, :id=>"systemset_01"%>
 
       </ul>
     </div>

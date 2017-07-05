@@ -53,6 +53,7 @@ gem 'sidekiq'
 
 gem 'clockwork'
 gem 'will_paginate'
+gem 'rails-i18n'
 
 
 group :development, :test do

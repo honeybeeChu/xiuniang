@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170526054847) do
+ActiveRecord::Schema.define(version: 20170704124904) do
 
   create_table "dianyuans", force: :cascade do |t|
     t.string   "DYDM",        limit: 255, null: false
@@ -108,9 +108,22 @@ ActiveRecord::Schema.define(version: 20170526054847) do
     t.integer  "total_consumption",  limit: 4
     t.integer  "recent_consumption", limit: 4
     t.datetime "update_points_date"
+    t.integer  "total_num",          limit: 4
   end
 
   add_index "memberships", ["openid"], name: "index_memberships_on_openid", using: :btree
+
+  create_table "offline_vip_orders", force: :cascade do |t|
+    t.string   "vip_card",   limit: 255
+    t.datetime "trade_date"
+    t.string   "gkmc",       limit: 255
+    t.integer  "sex",        limit: 4
+    t.string   "get_money",  limit: 255
+    t.string   "telephone",  limit: 255
+    t.string   "vshop",      limit: 255
+    t.string   "vempcode",   limit: 255
+    t.string   "vspcode",    limit: 255
+  end
 
   create_table "points_records", force: :cascade do |t|
     t.integer  "fans_id",      limit: 4
@@ -131,8 +144,11 @@ ActiveRecord::Schema.define(version: 20170526054847) do
     t.integer  "level",       limit: 4
     t.integer  "consumption", limit: 4
     t.float    "rate",        limit: 24
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+    t.string   "name",        limit: 255
+    t.integer  "trade_num",   limit: 4
+    t.integer  "condition",   limit: 4
   end
 
   create_table "stores", force: :cascade do |t|

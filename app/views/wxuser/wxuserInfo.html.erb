@@ -97,7 +97,6 @@
         timeout:360000,
         async:true,
         success: function (data) {
-          alert(data.err_msg)
           $('<div class="results"  style="position:fixed;z-index:999;top:0px ">' + data.err_msg + '</div>').appendTo("body").fadeOut(2000);
         },
         error: function (msg) {

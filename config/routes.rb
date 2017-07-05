@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'test/index'
+
   get 'manager/login'
 
   mount WeixinRailsMiddleware::Engine, at: "/"
@@ -29,6 +31,10 @@ Rails.application.routes.draw do
   get 'wxuser/synchronizeWxuser'
   get 'wxuser/distribution'
   get 'wxuser/wxuserInfo'
+
+  # get 'system/pointsSet'
+  resources :points_rules
+  post 'points_rules/modify'
 
 
   get 'membership/info'
