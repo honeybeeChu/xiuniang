@@ -132,7 +132,7 @@ class DianyuanController < ApplicationController
             new_dianyuan.ORIGIN = dianyuan["ORIGIN"]
           end
           if dianyuan["OUT"] != "null"
-            new_dianyuan.OUT = dianyuan["OUT"]
+            new_dianyuan.ISOUT = dianyuan["OUT"]
           end
           if dianyuan["OUT_DATE"] != "null"
             new_dianyuan.OUT_DATE = dianyuan["OUT_DATE"]
