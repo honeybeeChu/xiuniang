@@ -107,38 +107,48 @@ WeixinRailsMiddleware::WeixinController.class_eval do
 
     # 关注公众账号
     def handle_subscribe_event
+      WX_LOGGER.info @weixin_message.FromUserName + "subscribe this account"
+      begin
+        if WxUser.find_by_openid(@weixin_message.FromUserName).nil?
+          WX_LOGGER.info("there is no this fans before...")
 
-      if WxUser.find_by_openid(@weixin_message.FromUserName).nil?
+          $client ||= WeixinAuthorize::Client.new(WX_APPID, WX_SECRET)
 
-        $client ||= WeixinAuthorize::Client.new(WX_APPID, WX_SECRET)
+          wxuserObj = $client.user @weixin_message.FromUserName
 
-        wxuserObj = $client.user @weixin_message.FromUserName
+          WX_LOGGER.info("wxuserObj: #{wxuserObj}")
 
-        if wxuserObj.en_msg == "ok"
-          wxuser = wxuserObj.result
+          if wxuserObj.en_msg == "ok"
+            WX_LOGGER.info("wxuserObj.en_msg == ok")
+            wxuser = wxuserObj.result
+            new_wxuser = WxUser.new
+            new_wxuser.openid=wxuser[:openid]
+            new_wxuser.nickname=emoji_filter(wxuser[:nickname])
+            new_wxuser.sex=wxuser[:sex]
+            new_wxuser.language=wxuser[:language]
+            new_wxuser.city=wxuser[:city]
+            new_wxuser.province=wxuser[:province]
+            new_wxuser.country=wxuser[:country]
+            new_wxuser.headimgurl=wxuser[:headimgurl]
+            new_wxuser.subscribe_time=Time.at(wxuser[:subscribe_time])
+            new_wxuser.unionid=wxuser[:unionid]
+            new_wxuser.remark=wxuser[:remark]
+            new_wxuser.groupid=wxuser[:groupid]
+            new_wxuser.subscribe=wxuser[:subscribe]
+            new_wxuser.phone=wxuser[:phone]
+            new_wxuser.is_member=false
 
-          new_wxuser = WxUser.new
-          new_wxuser.openid=wxuser[:openid]
-          new_wxuser.nickname=emoji_filter(wxuser[:nickname])
-          new_wxuser.sex=wxuser[:sex]
-          new_wxuser.language=wxuser[:language]
-          new_wxuser.city=wxuser[:city]
-          new_wxuser.province=wxuser[:province]
-          new_wxuser.country=wxuser[:country]
-          new_wxuser.headimgurl=wxuser[:headimgurl]
-          new_wxuser.subscribe_time=Time.at(wxuser[:subscribe_time])
-          new_wxuser.unionid=wxuser[:unionid]
-          new_wxuser.remark=wxuser[:remark]
-          new_wxuser.groupid=wxuser[:groupid]
-          new_wxuser.subscribe=wxuser[:subscribe]
-          new_wxuser.phone=wxuser[:phone]
-          new_wxuser.is_member=false
+            new_wxuser.save
+          end
 
-          new_wxuser.save
+
         end
 
-
+      rescue Exception => e
+        WX_LOGGER.error e.to_s
       end
+
+
 
 
       # if @keyword.present?
