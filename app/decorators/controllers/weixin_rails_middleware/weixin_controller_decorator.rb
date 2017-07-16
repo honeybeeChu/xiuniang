@@ -106,14 +106,48 @@ WeixinRailsMiddleware::WeixinController.class_eval do
     end
 
     # 关注公众账号
-    # def handle_subscribe_event
-    #   if @keyword.present?
-    #     # 扫描带参数二维码事件: 1. 用户未关注时，进行关注后的事件推送
-    #     return reply_text_message("扫描带参数二维码事件: 1. 用户未关注时，进行关注后的事件推送, keyword: #{@keyword}")
-    #   end
-    #   Rails.logger.info("关注公众号")
-    #   reply_text_message(AFTER_SUBSCRIBE_MESSAGE)
-    # end
+    def handle_subscribe_event
+
+      if WxUser.find_by_openid(@weixin_message.FromUserName).nil?
+
+        $client ||= WeixinAuthorize::Client.new(WX_APPID, WX_SECRET)
+
+        wxuserObj = $client.user @weixin_message.FromUserName
+
+        if wxuserObj.en_msg == "ok"
+          wxuser = wxuserObj.result
+
+          new_wxuser = WxUser.new
+          new_wxuser.openid=wxuser[:openid]
+          new_wxuser.nickname=emoji_filter(wxuser[:nickname])
+          new_wxuser.sex=wxuser[:sex]
+          new_wxuser.language=wxuser[:language]
+          new_wxuser.city=wxuser[:city]
+          new_wxuser.province=wxuser[:province]
+          new_wxuser.country=wxuser[:country]
+          new_wxuser.headimgurl=wxuser[:headimgurl]
+          new_wxuser.subscribe_time=Time.at(wxuser[:subscribe_time])
+          new_wxuser.unionid=wxuser[:unionid]
+          new_wxuser.remark=wxuser[:remark]
+          new_wxuser.groupid=wxuser[:groupid]
+          new_wxuser.subscribe=wxuser[:subscribe]
+          new_wxuser.phone=wxuser[:phone]
+          new_wxuser.is_member=false
+
+          new_wxuser.save
+        end
+
+
+      end
+
+
+      # if @keyword.present?
+      #   # 扫描带参数二维码事件: 1. 用户未关注时，进行关注后的事件推送
+      #   # return reply_text_message("扫描带参数二维码事件: 1. 用户未关注时，进行关注后的事件推送, keyword: #{@keyword}")
+      # end
+
+      # reply_text_message(AFTER_SUBSCRIBE_MESSAGE)
+    end
 
     # 取消关注
     def handle_unsubscribe_event
