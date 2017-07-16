@@ -7,11 +7,7 @@ class PointsRulesController < ApplicationController
   end
 
 
-
   def modify
-    puts '-----------++++++++++++++++++++++++++++++++++++++++++--'
-    puts params[:condition]
-    puts '-------------'
     points_rule =  PointsRule.find(params[:id])
     # points_rule[:name] = params[:name]
     # points_rule[:rate] = params[:rate]
@@ -21,7 +17,7 @@ class PointsRulesController < ApplicationController
     #
     # points_rule.update_attribute(:rate, params[:rate])
 
-     points_rule.update_attributes(:name => params[:name],:rate => params[:rate],:trade_num => params[:trade_num],:condition => params[:condition],:consumption =>  params[:consumption])
+     points_rule.update_attributes(:name => params[:name],:rate => params[:rate],:trade_num => params[:trade_num],:conditions => params[:conditions],:consumption =>  params[:consumption])
 
 
     respond_to do |format|
@@ -36,6 +32,6 @@ class PointsRulesController < ApplicationController
 
   private
   def pointsrule_params
-    params.require(:pointsrule).permit(:name,:level, :rate, :consumption,:condition, :trade_num)
+    params.require(:pointsrule).permit(:name,:level, :rate, :consumption,:conditions, :trade_num)
   end
 end

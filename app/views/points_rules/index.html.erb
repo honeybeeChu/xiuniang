@@ -23,18 +23,18 @@
             <input class="point_rule_name" style="width: 120px;" type="text" value="<%= pointsrule.name %>" />
           </td>
           <td style="text-align: left;padding:8px;width: 65%;">
-            <select data-id="<%= pointsrule.id %>" class="select_condition" style=" width: 100px;
+            <select data-id="<%= pointsrule.id %>" class="select_conditions" style=" width: 100px;
                 margin-left: 10px;
                 float: left;
                 margin-right: 50px;
                 display: inline-block;">
-              <option value=1 <%= pointsrule.condition == 0 ? 'selected' : "" %> >按笔数</option>
-              <option value=2 <%= pointsrule.condition == 1 ? 'selected' : "" %>>按总消费额</option>
-              <option value=3 <%= pointsrule.condition == 2 || pointsrule.condition == 3 ? 'selected' : "" %>>组合条件</option>
-              <option value=4 <%= pointsrule.condition == 4 ? 'selected' : "" %>>按单笔消费额</option>
+              <option value=1 <%= pointsrule.conditions == 0 ? 'selected' : "" %> >按笔数</option>
+              <option value=2 <%= pointsrule.conditions == 1 ? 'selected' : "" %>>按总消费额</option>
+              <option value=3 <%= pointsrule.conditions == 2 || pointsrule.conditions == 3 ? 'selected' : "" %>>组合条件</option>
+              <option value=4 <%= pointsrule.conditions == 4 ? 'selected' : "" %>>按单笔消费额</option>
             </select>
 
-            <div class="by_trade_num" style="display:<%= pointsrule.condition == 0 ? 'block' : 'none' %>;">
+            <div class="by_trade_num" style="display:<%= pointsrule.conditions == 0 ? 'block' : 'none' %>;">
               成交满
               <input  type="number" value="<%= pointsrule.trade_num %>">
               笔
@@ -44,20 +44,20 @@
 
 
 
-            <div class="by_consumption" style="display:<%= pointsrule.condition == 1 ? 'block' : 'none' %>;">
+            <div class="by_consumption" style="display:<%= pointsrule.conditions == 1 ? 'block' : 'none' %>;">
               总消费满
               <input type="number" value="<%= pointsrule.consumption %>">元
             </div>
 
 
 
-            <div class="by_all_condition" style="display:<%= pointsrule.condition == 2 ||  pointsrule.condition == 3? 'block' : 'none' %>;">
+            <div class="by_all_conditions" style="display:<%= pointsrule.conditions == 2 ||  pointsrule.conditions == 3? 'block' : 'none' %>;">
               成交满
               <input type="number" class="trand_num_item" value="<%= pointsrule.trade_num %>">笔
               &nbsp;&nbsp;
               <select style="width: 60px;">
-                <option value=2 <%= pointsrule.condition == 2 ? 'selected' : "" %>>或者</option>
-                <option value=3 <%= pointsrule.condition == 3 ? 'selected' : "" %>>并且</option>
+                <option value=2 <%= pointsrule.conditions == 2 ? 'selected' : "" %>>或者</option>
+                <option value=3 <%= pointsrule.conditions == 3 ? 'selected' : "" %>>并且</option>
               </select>
               &nbsp;&nbsp;总消费满
               <input type="number" class="consumption_item" value="<%= pointsrule.consumption %>">
@@ -66,7 +66,7 @@
 
 
 
-            <div class="by_one_condition" style="display:<%= pointsrule.condition ==  4 ? 'block' : 'none' %>;">
+            <div class="by_one_conditions" style="display:<%= pointsrule.conditions ==  4 ? 'block' : 'none' %>;">
               单笔消费满
               <input type="number" class="one_consumption_item" value="<%= pointsrule.consumption %>">
               元
@@ -93,32 +93,32 @@
 <script>
 
 
-  $(".select_condition").change(function(){
+  $(".select_conditions").change(function(){
     var rule_id = $(this).attr("data-id");
 
     if(1 == $(this).val()){
       $(this).parent().find(".by_trade_num").show();
       $(this).parent().find(".by_consumption").hide();
-      $(this).parent().find(".by_all_condition").hide();
-      $(this).parent().find(".by_one_condition").hide();
+      $(this).parent().find(".by_all_conditions").hide();
+      $(this).parent().find(".by_one_conditions").hide();
     }
     else if(2 == $(this).val()){
       $(this).parent().find(".by_trade_num").hide();
       $(this).parent().find(".by_consumption").show();
-      $(this).parent().find(".by_all_condition").hide();
-      $(this).parent().find(".by_one_condition").hide();
+      $(this).parent().find(".by_all_conditions").hide();
+      $(this).parent().find(".by_one_conditions").hide();
     }
     else if(3 == $(this).val()){
       $(this).parent().find(".by_trade_num").hide();
       $(this).parent().find(".by_consumption").hide();
-      $(this).parent().find(".by_all_condition").show();
-      $(this).parent().find(".by_one_condition").hide();
+      $(this).parent().find(".by_all_conditions").show();
+      $(this).parent().find(".by_one_conditions").hide();
     }
     else if(4 == $(this).val()){
       $(this).parent().find(".by_trade_num").hide();
       $(this).parent().find(".by_consumption").hide();
-      $(this).parent().find(".by_all_condition").hide();
-      $(this).parent().find(".by_one_condition").show();
+      $(this).parent().find(".by_all_conditions").hide();
+      $(this).parent().find(".by_one_conditions").show();
     }
 
   });
@@ -128,7 +128,7 @@
 
     var name = $("tr[data-id=" + rule_id +"]").find(".point_rule_name").val();
 
-    var select_condition = $("tr[data-id=" + rule_id +"]").find(".select_condition").val();
+    var select_conditions = $("tr[data-id=" + rule_id +"]").find(".select_conditions").val();
 
     var rate = $("tr[data-id=" + rule_id +"]").find(".point_rule_rate").val();
 
@@ -152,9 +152,9 @@
 
 
     //只考虑交易笔数
-    if(1 == select_condition){
+    if(1 == select_conditions){
       autoObject.trade_num = $("tr[data-id=" + rule_id +"]").find(".by_trade_num input").val();
-      autoObject.condition=0;
+      autoObject.conditions=0;
       autoObject.consumption =0;
       if($.trim(autoObject.trade_num) == ""){
         alert("交易笔数不能为空");
@@ -162,31 +162,31 @@
       }
     }
     //只考虑交易金额
-    else if(2 == select_condition){
+    else if(2 == select_conditions){
       autoObject.consumption = $("tr[data-id=" + rule_id +"]").find(".by_consumption input").val();
       autoObject.trade_num =0;
-      autoObject.condition=1;
+      autoObject.conditions=1;
       if($.trim(autoObject.consumption) == ""){
         alert("交易金额不能为空");
         return;
       }
     }
     //组合条件
-    else if(3 == select_condition){
-      var _condition = $("tr[data-id=" + rule_id +"]").find(".by_all_condition select").val();
-      autoObject.condition=_condition;
-      autoObject.consumption = $("tr[data-id=" + rule_id +"]").find(".by_all_condition .consumption_item").val();
-      autoObject.trade_num = $("tr[data-id=" + rule_id +"]").find(".by_all_condition .trand_num_item").val();
+    else if(3 == select_conditions){
+      var _conditions = $("tr[data-id=" + rule_id +"]").find(".by_all_conditions select").val();
+      autoObject.conditions=_conditions;
+      autoObject.consumption = $("tr[data-id=" + rule_id +"]").find(".by_all_conditions .consumption_item").val();
+      autoObject.trade_num = $("tr[data-id=" + rule_id +"]").find(".by_all_conditions .trand_num_item").val();
 
       if($.trim(autoObject.consumption) == "" || $.trim(autoObject.trade_num) == ""){
         alert("交易金额和笔数不能为空");
         return;
       }
     }
-    else if(4 == select_condition){
-      autoObject.consumption = $("tr[data-id=" + rule_id +"]").find(".by_one_condition input").val();
+    else if(4 == select_conditions){
+      autoObject.consumption = $("tr[data-id=" + rule_id +"]").find(".by_one_conditions input").val();
       autoObject.trade_num =0;
-      autoObject.condition=4;
+      autoObject.conditions=4;
 
       if($.trim(autoObject.consumption) == ""){
         alert("单笔金额不能为空");

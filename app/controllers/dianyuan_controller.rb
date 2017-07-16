@@ -2,13 +2,13 @@ class DianyuanController < ApplicationController
   layout 'manager'
   def dianyuanInfo
     if params[:DYMC].nil? || params[:DYMC].strip == ""
-      @dianyuan_account = Dianyuan.all.size
-      @Dianyuans = Dianyuan.paginate(page:params[:page],per_page:10)
+      @dianyuan_account = Dianyuan.where("ISOUT != 1").size
+      @Dianyuans = Dianyuan.where("ISOUT != 1").paginate(page:params[:page],per_page:10)
       @current_page = params[:page] == nil ? 1 : params[:page]
       render "dianyuanInfo"
     else
       dymc = params[:DYMC].strip
-      result_dianyuans = Dianyuan.where("DYMC LIKE '%#{dymc}%'")
+      result_dianyuans = Dianyuan.where("DYMC LIKE '%#{dymc}%' and ISOUT != 1")
       @Dianyuans = result_dianyuans.paginate(page:params[:page],per_page:10)
       @dianyuan_account = result_dianyuans.length
       @current_page = params[:page] == nil ? 1 : params[:page]

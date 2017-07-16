@@ -251,6 +251,7 @@ WeixinRailsMiddleware::WeixinController.class_eval do
     begin
       params = {"card_id":@weixin_message.CardId,"code":@weixin_message.UserCardCode}
       $client ||= WeixinAuthorize::Client.new(WX_APPID, WX_SECRET)
+
       membershipinfo = $client.http_post("https://api.weixin.qq.com/card/membercard/userinfo/get",
                                          params,{}, WeixinAuthorize::CUSTOM_ENDPOINT)
 
@@ -313,6 +314,8 @@ WeixinRailsMiddleware::WeixinController.class_eval do
     # </xml>
     # 卡券删除事件推送
     def handle_user_del_card_event
+      membsership = Membership.find_by_card_id @weixin_message.CardId
+      membsership.destroy
       Rails.logger.info("回调事件处理")
     end
 
