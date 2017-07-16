@@ -113,13 +113,9 @@ WeixinRailsMiddleware::WeixinController.class_eval do
           WX_LOGGER.info("there is no this fans before...")
 
           $client ||= WeixinAuthorize::Client.new(WX_APPID, WX_SECRET)
-
           wxuserObj = $client.user @weixin_message.FromUserName
 
-          WX_LOGGER.info("wxuserObj: #{wxuserObj}")
-
           if wxuserObj.en_msg == "ok"
-            WX_LOGGER.info("wxuserObj.en_msg == ok")
             wxuser = wxuserObj.result
             new_wxuser = WxUser.new
             new_wxuser.openid=wxuser[:openid]
@@ -477,6 +473,13 @@ WeixinRailsMiddleware::WeixinController.class_eval do
       html_response = http.read
     end
     return html_response
+  end
+
+
+  private
+  def emoji_filter(str)
+    pattern = /[\u{1F300}-\u{1F64F}\u{1F680}-\u{1F6FF}\u{1F1E6}-\u{1F1FF}-\u{1F195}-\u{1F981}\u231A\u231B\u23E9-\u23EC\u23F0\u23F3\u2614\u2615\u2648-\u2653\u267F\u2693\u26A1\u26AA\u26AB\u26B3-\u26BD\u26BF-\u26E1\u26E3-\u26FF\u2705\u270A\u270B\u2728\u274C\u274E\u2753\u2757\u2795\u2796\u2797\u27B0\u27BF\u{1F1E6}-\u{1F1FF},'🦁','🦄',' ']/x
+    str.gsub(pattern, '')
   end
 
 
