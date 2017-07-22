@@ -55,7 +55,7 @@
           <!--<td><%=dianyuan.EMAIL==nil ? "无": dianyuan.EMAIL %></td>-->
           <td><%=dianyuan.ADDRESS==nil ? "无": dianyuan.ADDRESS %></td>
           <!--<td><%=dianyuan.IN_DATE==nil ? "无": dianyuan.IN_DATE %></td>-->
-          <td><%=link_to "预览",dianyuan_downloadQrcode_path(:dydm => dianyuan.DYDM)%></td>
+          <td><%=link_to "预览",dianyuan_downloadQrcode_path(:dyid => dianyuan.id)%></td>
         </tr>
         <%end%>
     <%end%>
