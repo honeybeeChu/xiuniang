@@ -47,7 +47,6 @@ class DianyuanController < ApplicationController
     else
       dianyuansObj = JSON.parse(get(DIANYUAN_INFO_URL).to_s)
 
-      Dianyuan.destroy_all
       dianyuansObj.each do |dianyuan|
         if Dianyuan.find_by_DYDM(dianyuan["DYDM"]).nil?
           new_dianyuan = Dianyuan.new
@@ -181,8 +180,8 @@ class DianyuanController < ApplicationController
                 "code": "",
                 "openid": "",
                 "is_unique_code": true,
-                "outer_str":params[:dydm],
-                "outer_id":params[:dydm]
+                "outer_str":params[:dyid],
+                "outer_id":params[:dyid]
             }
         }
     }
