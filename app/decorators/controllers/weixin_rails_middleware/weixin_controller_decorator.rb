@@ -354,7 +354,7 @@ WeixinRailsMiddleware::WeixinController.class_eval do
     # </xml>
     # 卡券删除事件推送
     def handle_user_del_card_event
-      membsership = Membership.find_by_card_id @weixin_message.CardId
+      membsership = Membership.find_by_code @weixin_message.UserCardCode
       membsership.destroy
       Rails.logger.info("回调事件处理")
     end
